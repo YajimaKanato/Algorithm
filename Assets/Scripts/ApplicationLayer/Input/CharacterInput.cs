@@ -3,9 +3,9 @@ using UnityEngine;
 [RequireComponent(typeof(CharacterView))]
 public abstract class CharacterInput : MonoBehaviour
 {
-    CharacterSystem _characterSystem;
-    CharacterView _characterView;
-    CharacterPool _pool;
+    protected CharacterSystem _characterSystem;
+    protected CharacterView _characterView;
+    protected CharacterPool _pool;
     protected Node[] _targets;
     protected Vector3 _target;
 
@@ -17,7 +17,6 @@ public abstract class CharacterInput : MonoBehaviour
         _characterSystem = characterSystem;
         _pool = pool;
         _characterView = GetComponent<CharacterView>();
-        _isInit = true;
     }
 
     public void StatusReset(int id)
@@ -41,7 +40,7 @@ public abstract class CharacterInput : MonoBehaviour
 
     public void MoveSetting()
     {
-        _characterSystem.Move(_id, _characterView, transform.position, _target);
+        _characterSystem.Move<CharacterRuntimeData>(_id, _characterView, transform.position, _target);
     }
 
     void ReleaseToPool()

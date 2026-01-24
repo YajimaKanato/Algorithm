@@ -2,42 +2,30 @@ using DataDriven;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterPool : MonoBehaviour
+public abstract class CharacterPool : MonoBehaviour
 {
-    [SerializeField] CharacterDefaultData _defaultData;
     [SerializeField] CharacterInput _character;
-    [SerializeField] CharacterInput _characterw;
-    CharacterSystem _system;
-    RuntimeDataRepository _repository;
+    protected CharacterSystem _system;
+    protected RuntimeDataRepository _repository;
     Queue<CharacterInput> _queue;
 
     int _maxQueueCount = 10;
     int _nextID;
-    float _interval = 100f;
-    float _delta;
     bool _isInit;
 
     public void Init(CharacterSystem system, RuntimeDataRepository repository)
     {
         _system = system;
         _repository = repository;
-        _delta = _interval;
         _queue = new Queue<CharacterInput>();
         _isInit = true;
-        Spawn(_character, new Vector3(0, 1, 0));
-        Spawn(_characterw, new Vector3(5, 1, 2));
+        Spawn();
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!_isInit) return;
-        //_delta += Time.deltaTime;
-        //if (_delta >= _interval)
-        //{
-        //    _delta = 0;
-        //    Spawn();
-        //}
     }
 
     public void Spawn()
@@ -51,22 +39,14 @@ public class CharacterPool : MonoBehaviour
         }
         else
         {
-            go = Instantiate(_character, new Vector3(0, 1, 0), Quaternion.identity);
-            go.Init(_system, this);
+            go = Instantiate(_character);
         }
         CreateRuntime(_nextID);
         go?.StatusReset(_nextID);
         _nextID++;
     }
 
-    public void Spawn(CharacterInput character, Vector3 pos)
-    {
-        var go = Instantiate(character, pos, Quaternion.identity);
-        go.Init(_system, this);
-        CreateRuntime(_nextID);
-        go?.StatusReset(_nextID);
-        _nextID++;
-    }
+    public abstract CharacterInput Instantiate(CharacterInput character);
 
     public void ReleaseToPool(CharacterInput character)
     {
@@ -81,11 +61,5 @@ public class CharacterPool : MonoBehaviour
         }
     }
 
-    void CreateRuntime(int id)
-    {
-        if (_repository.TryGetData<CharacterRuntimeData>(id, out var d)) return;
-
-        var data = new CharacterRuntimeData(_defaultData);
-        _repository.RegisterData(id, data);
-    }
+    protected abstract void CreateRuntime(int id);
 }

@@ -11,9 +11,9 @@ public class CharacterSystem
         _repository = repository;
     }
 
-    public void Move(int id, CharacterView view, Vector3 start, Vector3 goal)
+    public void Move<T>(int id, CharacterView view, Vector3 start, Vector3 goal) where T : CharacterRuntimeData
     {
-        if (!_repository.TryGetData<CharacterRuntimeData>(id, out var data)) return;
+        if (!_repository.TryGetData<T>(id, out var data)) return;
         var startNode = AstarAlgorithm.Instance.NearestNode(start);
         var goalNode = AstarAlgorithm.Instance.NearestNode(goal);
         var node = AstarAlgorithm.Instance.PartlyAstar(startNode, goalNode);
