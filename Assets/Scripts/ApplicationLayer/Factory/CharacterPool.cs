@@ -6,6 +6,7 @@ public class CharacterPool : MonoBehaviour
 {
     [SerializeField] CharacterDefaultData _defaultData;
     [SerializeField] CharacterInput _character;
+    [SerializeField] CharacterInput _characterw;
     CharacterSystem _system;
     RuntimeDataRepository _repository;
     Queue<CharacterInput> _queue;
@@ -23,18 +24,20 @@ public class CharacterPool : MonoBehaviour
         _delta = _interval;
         _queue = new Queue<CharacterInput>();
         _isInit = true;
+        Spawn(_character, new Vector3(0, 1, 0));
+        Spawn(_characterw, new Vector3(5, 1, 2));
     }
 
     // Update is called once per frame
     void Update()
     {
         if (!_isInit) return;
-        _delta += Time.deltaTime;
-        if (_delta >= _interval)
-        {
-            _delta = 0;
-            Spawn();
-        }
+        //_delta += Time.deltaTime;
+        //if (_delta >= _interval)
+        //{
+        //    _delta = 0;
+        //    Spawn();
+        //}
     }
 
     public void Spawn()
@@ -51,6 +54,15 @@ public class CharacterPool : MonoBehaviour
             go = Instantiate(_character, new Vector3(0, 1, 0), Quaternion.identity);
             go.Init(_system, this);
         }
+        CreateRuntime(_nextID);
+        go?.StatusReset(_nextID);
+        _nextID++;
+    }
+
+    public void Spawn(CharacterInput character, Vector3 pos)
+    {
+        var go = Instantiate(character, pos, Quaternion.identity);
+        go.Init(_system, this);
         CreateRuntime(_nextID);
         go?.StatusReset(_nextID);
         _nextID++;

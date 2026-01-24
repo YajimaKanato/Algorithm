@@ -1,12 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-[RequireComponent(typeof(Rigidbody))]
+[RequireComponent(typeof(Rigidbody), typeof(NavMeshAgent))]
 public class CharacterView : MonoBehaviour
 {
-    NavMeshAgent _agent;
     Rigidbody _rb;
-    Vector3 _start;
+    NavMeshAgent _agent;
     Vector3 _dir;
     float _speed;
     bool _isGoal;
@@ -17,6 +16,12 @@ public class CharacterView : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
+
+        _agent.updatePosition = false;
+        _agent.updateRotation = false;
+
+        _rb.isKinematic = false;
+        _rb.constraints = RigidbodyConstraints.FreezeRotation;
     }
 
     private void OnEnable()
@@ -24,18 +29,25 @@ public class CharacterView : MonoBehaviour
         _isGoal = false;
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
-        //_rb.linearVelocity = Vector3.MoveTowards(_start, _dir, _speed).normalized;
-        _isGoal = !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance;
+        var desired = _agent.desiredVelocity;
+        _dir = desired.normalized * _speed;
+        _dir.y = _rb.linearVelocity.y;
+        _rb.linearVelocity = _dir;
+        _agent.nextPosition = _rb.position;
     }
 
-    public void Move(Vector3 start, Vector3 dir, float speed)
+    public void Move(Node target, Node goal, float speed)
     {
-        _start = start;
-        _dir = dir;
+        _agent.SetDestination(target.transform.position);
         _speed = speed;
-        Debug.Log(Vector3.MoveTowards(_start, _dir, _speed).normalized);
-        _agent.SetDestination(start);
+        _isGoal = target == goal;
+    }
+
+    public bool IsArrived()
+    {
+        return !_agent.pathPending &&
+               _agent.remainingDistance <= _agent.stoppingDistance;
     }
 }

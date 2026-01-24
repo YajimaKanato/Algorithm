@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1015aea4b50f0e341a3a50e6db660c12, type: 3}
   m_Name: CharacterDefaultData
   m_EditorClassIdentifier: Assembly-CSharp::CharacterDefaultData
-  _speed: 10
+  _speed: 5
   _maxSpeed: 10

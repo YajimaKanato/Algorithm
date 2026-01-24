@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    AstarAlgorithm _astrAlgorithm;
     RuntimeDataRepository _repository;
     CharacterSystem _characterSystem;
     CharacterPool _characterPool;
@@ -32,6 +33,8 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        _astrAlgorithm = FindFirstObjectByType<AstarAlgorithm>();
+        _astrAlgorithm.Init();
         _characterPool = FindFirstObjectByType<CharacterPool>();
         _characterPool.Init(_characterSystem, _repository);
     }
