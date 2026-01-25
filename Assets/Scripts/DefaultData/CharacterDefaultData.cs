@@ -13,4 +13,6 @@ public abstract class CharacterDefaultData : ScriptableObject, IDefault
     public int Power => _power;
     public int Defence => _defence;
     public float Speed => _speed;
+
+    public abstract void CreateRuntimeData(RuntimeDataRepository repository, int id);
 }

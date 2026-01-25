@@ -1,12 +1,12 @@
-using DataDriven;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterPool : MonoBehaviour
+public class CharacterPool : MonoBehaviour
 {
+    [SerializeField] CharacterDefaultData _defaultData;
     [SerializeField] CharacterInput _character;
-    protected CharacterSystem _system;
-    protected RuntimeDataRepository _repository;
+    CharacterSystem _system;
+    RuntimeDataRepository _repository;
     Queue<CharacterInput> _queue;
 
     int _maxQueueCount = 10;
@@ -39,14 +39,13 @@ public abstract class CharacterPool : MonoBehaviour
         }
         else
         {
-            go = Instantiate(_character);
+            go = Instantiate(_character, new Vector3(0, 1, 0), Quaternion.identity);
+            go.Init(_system, this);
         }
-        CreateRuntime(_nextID);
+        _defaultData.CreateRuntimeData(_repository, _nextID);
         go?.StatusReset(_nextID);
         _nextID++;
     }
-
-    public abstract CharacterInput Instantiate(CharacterInput character);
 
     public void ReleaseToPool(CharacterInput character)
     {
@@ -60,6 +59,4 @@ public abstract class CharacterPool : MonoBehaviour
             character.gameObject.SetActive(false);
         }
     }
-
-    protected abstract void CreateRuntime(int id);
 }

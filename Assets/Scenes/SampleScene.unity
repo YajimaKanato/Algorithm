@@ -742,7 +742,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 408411341}
-  - component: {fileID: 408411340}
+  - component: {fileID: 408411342}
   m_Layer: 0
   m_Name: WarriorPool
   m_TagString: Untagged
@@ -750,20 +750,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &408411340
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 408411339}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7162e0413c0a8364ebaed08dc51227ce, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::WarriorPool
-  _character: {fileID: 3236541922502301552, guid: dff618fe349613b4d98a47106ab1f04c, type: 3}
-  _data: {fileID: 11400000, guid: a6bd2dd2ee946f54793734712bf81e07, type: 2}
 --- !u!4 &408411341
 Transform:
   m_ObjectHideFlags: 0
@@ -779,6 +765,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &408411342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 408411339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d45ce128826b649af6bcbb1d709609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterPool
+  _defaultData: {fileID: 11400000, guid: a6bd2dd2ee946f54793734712bf81e07, type: 2}
+  _character: {fileID: 3236541922502301552, guid: dff618fe349613b4d98a47106ab1f04c, type: 3}
 --- !u!1 &410087039
 GameObject:
   m_ObjectHideFlags: 0
@@ -1157,7 +1157,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 941103144}
-  - component: {fileID: 941103143}
+  - component: {fileID: 941103145}
   m_Layer: 0
   m_Name: HealerPool
   m_TagString: Untagged
@@ -1165,20 +1165,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &941103143
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 941103142}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2619c393996214646b1fe7c679bb7dc7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HealerPool
-  _character: {fileID: -6963312707022948882, guid: ed0c5ba6fe37ca843ab3fdb2e60a47f9, type: 3}
-  _data: {fileID: 11400000, guid: 5db3a9fdc63a8c34e911d2f4adae0ff2, type: 2}
 --- !u!4 &941103144
 Transform:
   m_ObjectHideFlags: 0
@@ -1194,6 +1180,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &941103145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 941103142}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d45ce128826b649af6bcbb1d709609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterPool
+  _defaultData: {fileID: 11400000, guid: 5db3a9fdc63a8c34e911d2f4adae0ff2, type: 2}
+  _character: {fileID: -6963312707022948882, guid: ed0c5ba6fe37ca843ab3fdb2e60a47f9, type: 3}
 --- !u!1 &1236152736
 GameObject:
   m_ObjectHideFlags: 0
@@ -1235,11 +1235,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 1236152736}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d95730c77cb8e1a4da2a7746030ab946, type: 3}
+  m_Script: {fileID: 11500000, guid: 13d45ce128826b649af6bcbb1d709609, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::HeroPool
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterPool
+  _defaultData: {fileID: 11400000, guid: 2aee432b9bbc667498d45aa08d7351fa, type: 2}
   _character: {fileID: 195174945206710647, guid: 3c4830a5729b4424b9924d9126a90311, type: 3}
-  _data: {fileID: 11400000, guid: 2aee432b9bbc667498d45aa08d7351fa, type: 2}
 --- !u!1 &1258713313
 GameObject:
   m_ObjectHideFlags: 0
@@ -2296,7 +2296,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1993051836}
-  - component: {fileID: 1993051835}
+  - component: {fileID: 1993051837}
   m_Layer: 0
   m_Name: MagusPool
   m_TagString: Untagged
@@ -2304,20 +2304,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1993051835
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1993051834}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 815f344a5d4209a40974abb024a24a0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::MagusPool
-  _character: {fileID: -6014199750766411372, guid: 2a3d768aa5448074d92b4da26ce58611, type: 3}
-  _data: {fileID: 11400000, guid: f5ce654e0a46f374e981e1370eba4f70, type: 2}
 --- !u!4 &1993051836
 Transform:
   m_ObjectHideFlags: 0
@@ -2333,6 +2319,20 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1993051837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1993051834}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13d45ce128826b649af6bcbb1d709609, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::CharacterPool
+  _defaultData: {fileID: 11400000, guid: f5ce654e0a46f374e981e1370eba4f70, type: 2}
+  _character: {fileID: -6014199750766411372, guid: 2a3d768aa5448074d92b4da26ce58611, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
