@@ -35,6 +35,7 @@ public class CharacterView : MonoBehaviour
         _dir = desired.normalized * _speed;
         _dir.y = _rb.linearVelocity.y;
         _rb.linearVelocity = _dir;
+        transform.forward = _dir;
         _agent.nextPosition = _rb.position;
     }
 

@@ -46,8 +46,7 @@ public abstract class CharacterInput : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Character"))
         {
-            TargetSetting();
-            MoveSetting();
+            ReleaseToPool();
         }
     }
 

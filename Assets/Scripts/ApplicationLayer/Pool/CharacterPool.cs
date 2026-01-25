@@ -19,7 +19,6 @@ public class CharacterPool : MonoBehaviour
         _repository = repository;
         _queue = new Queue<CharacterInput>();
         _isInit = true;
-        Spawn();
     }
 
     // Update is called once per frame
@@ -35,7 +34,7 @@ public class CharacterPool : MonoBehaviour
         {
             go = _queue.Dequeue();
             go.gameObject.SetActive(true);
-            go.transform.position = Vector3.zero;
+            go.transform.position = new Vector3(0, 1, 0);
         }
         else
         {

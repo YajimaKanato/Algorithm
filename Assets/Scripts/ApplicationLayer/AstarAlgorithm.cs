@@ -1,4 +1,9 @@
+using System;
+using System.Collections.Generic;
+using System.Drawing;
+using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.InputSystem.HID;
 
 public class AstarAlgorithm : MonoBehaviour
 {
@@ -68,5 +73,74 @@ public class AstarAlgorithm : MonoBehaviour
             }
         }
         return result;
+    }
+
+    //public Vector3[] Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
+    //{
+    //    Debug.Log($"{start.name} => {goal.name}");
+
+    //}
+}
+
+public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TPriority>
+{
+    List<(TElement element, TPriority priority)> _list = new();
+    public int Count => _list.Count;
+
+    public void Enqueue(TElement element, TPriority priority)
+    {
+        _list.Add((element, priority));
+        EnqueueHeapify();
+    }
+
+    public TElement Dequeue()
+    {
+        if (_list.Count <= 0) throw new InvalidOperationException("PriorityQueue is empty");
+        var index = _list.Count - 1;
+        (_list[0], _list[index]) = (_list[index], _list[0]);
+        var element = _list[index];
+        _list.RemoveAt(index);
+        DequeueHeapify();
+        return element.element;
+    }
+
+    public TElement Peek()
+    {
+        if (_list.Count <= 0) throw new InvalidOperationException("PriorityQueue is empty");
+        return _list[0].element;
+    }
+
+    void EnqueueHeapify()
+    {
+        int child = _list.Count - 1;
+        while (true)
+        {
+            int parent = (child - 1) / 2;
+            if (parent < 0) break;
+            if (_list[parent].priority.CompareTo(_list[child].priority) < 0) break;
+            (_list[parent], _list[child]) = (_list[child], _list[parent]);
+            child = parent;
+        }
+    }
+
+    void DequeueHeapify()
+    {
+        int parent = 0;
+        int size = _list.Count;
+        while (true)
+        {
+            int childLeft = 2 * parent + 1;
+            int childRight = childLeft + 1;
+            if (childLeft >= size) break;
+            int smallerChild = childLeft;
+            if (childRight < size && _list[childLeft].priority.CompareTo(_list[childRight].priority) > 0)
+            {
+                smallerChild = childRight;
+            }
+
+            if (_list[parent].priority.CompareTo(_list[smallerChild].priority) < 0) break;
+            (_list[parent], _list[smallerChild]) = (_list[smallerChild], _list[parent]);
+            parent = smallerChild;
+        }
     }
 }
