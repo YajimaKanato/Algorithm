@@ -9,8 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1015aea4b50f0e341a3a50e6db660c12, type: 3}
-  m_Name: CharacterDefaultData
-  m_EditorClassIdentifier: Assembly-CSharp::CharacterDefaultData
-  _speed: 5
-  _maxSpeed: 10
+  m_Script: {fileID: 11500000, guid: 533ff518749718a4cab1f3c69fe7522a, type: 3}
+  m_Name: HeroDefaultData
+  m_EditorClassIdentifier: Assembly-CSharp::HeroDefaultData
+  _cost: 0
+  _hp: 0
+  _power: 0
+  _defence: 0
+  _speed: 4

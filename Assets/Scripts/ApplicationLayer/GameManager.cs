@@ -7,7 +7,7 @@ public class GameManager : MonoBehaviour
     AstarAlgorithm _astrAlgorithm;
     RuntimeDataRepository _repository;
     CharacterSystem _characterSystem;
-    CharacterPool _characterPool;
+    CharacterPool[] _characterPools;
     static GameManager _instance;
 
     private void Awake()
@@ -35,8 +35,11 @@ public class GameManager : MonoBehaviour
     {
         _astrAlgorithm = FindFirstObjectByType<AstarAlgorithm>();
         _astrAlgorithm.Init();
-        _characterPool = FindFirstObjectByType<CharacterPool>();
-        _characterPool.Init(_characterSystem, _repository);
+        _characterPools = FindObjectsByType<CharacterPool>(FindObjectsSortMode.None);
+        foreach (var pool in _characterPools)
+        {
+            pool.Init(_characterSystem, _repository);
+        }
     }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created

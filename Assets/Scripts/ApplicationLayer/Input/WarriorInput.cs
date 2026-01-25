@@ -1,10 +1,10 @@
 using UnityEngine;
 
-public class HeroInput : CharacterInput
+public class WarriorInput : CharacterInput
 {
     public override void MoveSetting()
     {
-        _characterSystem.Move<HeroRuntimeData>(_id, _characterView, transform.position, _target);
+        _characterSystem.Move<WarriorRuntimeData>(_id, _characterView, transform.position, _target);
     }
 
     public override void TargetSetting()

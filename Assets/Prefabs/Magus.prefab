@@ -14,11 +14,11 @@ GameObject:
   - component: {fileID: 9127675953070261546}
   - component: {fileID: 1783972714090021814}
   - component: {fileID: 6216829010093972348}
-  - component: {fileID: 8117142466621686080}
+  - component: {fileID: -6014199750766411372}
   - component: {fileID: 4644670035070249152}
   m_Layer: 0
-  m_Name: Character1
-  m_TagString: Enemy
+  m_Name: Magus
+  m_TagString: Character
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -71,7 +71,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 31321ba15b8f8eb4c954353edc038b1d, type: 2}
+  - {fileID: 2100000, guid: fb92b828b04848646909a9a89eab2f21, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -156,7 +156,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ce7ee1f502f94caa00e5870becf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
---- !u!114 &8117142466621686080
+--- !u!114 &-6014199750766411372
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -165,9 +165,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 3760931492192520164}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0addc7bca0ac1934dba1d32d2e587060, type: 3}
+  m_Script: {fileID: 11500000, guid: 9135ef04a6600684c937e1ae2dda078e, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Character1
+  m_EditorClassIdentifier: Assembly-CSharp::MaguInput
 --- !u!195 &4644670035070249152
 NavMeshAgent:
   m_ObjectHideFlags: 0

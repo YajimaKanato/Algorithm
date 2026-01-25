@@ -9,7 +9,7 @@ public abstract class CharacterInput : MonoBehaviour
     protected Node[] _targets;
     protected Vector3 _target;
 
-    int _id;
+    protected int _id;
     bool _isInit;
 
     public void Init(CharacterSystem characterSystem, CharacterPool pool)
@@ -17,6 +17,8 @@ public abstract class CharacterInput : MonoBehaviour
         _characterSystem = characterSystem;
         _pool = pool;
         _characterView = GetComponent<CharacterView>();
+        _targets = FindObjectsByType<Node>(FindObjectsSortMode.None);
+        _isInit = true;
     }
 
     public void StatusReset(int id)
@@ -38,9 +40,15 @@ public abstract class CharacterInput : MonoBehaviour
 
     public abstract void TargetSetting();
 
-    public void MoveSetting()
+    public abstract void MoveSetting();
+
+    private void OnCollisionEnter(Collision collision)
     {
-        _characterSystem.Move<CharacterRuntimeData>(_id, _characterView, transform.position, _target);
+        if (collision.gameObject.CompareTag("Character"))
+        {
+            TargetSetting();
+            MoveSetting();
+        }
     }
 
     void ReleaseToPool()

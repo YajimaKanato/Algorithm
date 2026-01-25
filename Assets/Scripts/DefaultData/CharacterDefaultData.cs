@@ -1,7 +1,6 @@
 using UnityEngine;
 
-[CreateAssetMenu(fileName = "CharacterDefaultData", menuName = "DefaultData/CharacterDefaultData")]
-public class CharacterDefaultData : ScriptableObject, IDefault
+public abstract class CharacterDefaultData : ScriptableObject, IDefault
 {
     [SerializeField] int _cost;
     [SerializeField] int _hp;
