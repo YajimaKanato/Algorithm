@@ -1,15 +1,20 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class LineFlow : MonoBehaviour
 {
+    [SerializeField] GameObject _view;
     [SerializeField] float _speed = 1f;
+    LineRenderer _lineRenderer;
     Material _material;
+    GameObject _target;
     Vector2 _offset;
     float _offsetX;
 
     private void Awake()
     {
-        _material = GetComponent<LineRenderer>().material;
+        _lineRenderer = GetComponent<LineRenderer>();
+        _material = _lineRenderer.material;
         _offset = new Vector2(_offsetX, 0);
     }
 
@@ -19,10 +24,22 @@ public class LineFlow : MonoBehaviour
         _offsetX += Time.deltaTime * _speed;
         _offset.x = _offsetX;
         _material.mainTextureOffset = _offset;
+        if (_target) SetPosition();
     }
 
-    public void LineSetting()
+    public void LineSetting(List<Vector3> nodes, GameObject target)
     {
+        if (nodes == null || nodes.Count == 0) return;
+        _lineRenderer.positionCount = nodes.Count;
+        _lineRenderer.SetPositions(nodes.ToArray());
+        _target = target;
+        SetPosition();
+    }
 
+    void SetPosition()
+    {
+        if (_lineRenderer.positionCount <= 0) return;
+        _lineRenderer.SetPosition(0, _view.transform.position);
+        _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _target.transform.position);
     }
 }

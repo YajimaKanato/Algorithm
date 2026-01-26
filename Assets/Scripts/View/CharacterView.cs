@@ -1,9 +1,11 @@
 using UnityEngine;
 using UnityEngine.AI;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(Rigidbody), typeof(NavMeshAgent))]
 public class CharacterView : MonoBehaviour
 {
+    [SerializeField] LineFlow _line;
     Rigidbody _rb;
     NavMeshAgent _agent;
     Vector3 _dir;
@@ -44,6 +46,11 @@ public class CharacterView : MonoBehaviour
         _agent.SetDestination(target.transform.position);
         _speed = speed;
         _isGoal = target == goal;
+    }
+
+    public void LineSetting(List<Vector3> nodes, GameObject target)
+    {
+        _line.LineSetting(nodes, target);
     }
 
     public bool IsArrived()

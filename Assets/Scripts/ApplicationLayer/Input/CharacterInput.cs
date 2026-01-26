@@ -7,7 +7,7 @@ public abstract class CharacterInput : MonoBehaviour
     protected CharacterView _characterView;
     protected CharacterPool _pool;
     protected Node[] _targets;
-    protected Vector3 _target;
+    protected Node _target;
 
     protected int _id;
     bool _isInit;

@@ -1,13 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Drawing;
-using Unity.VisualScripting;
 using UnityEngine;
-using UnityEngine.InputSystem.HID;
 
 public class AstarAlgorithm : MonoBehaviour
 {
     Node[] _nodes;
+    Dictionary<Node, AStarRecord> _record;
 
     static AstarAlgorithm _instance;
     public static AstarAlgorithm Instance => _instance;
@@ -30,13 +28,13 @@ public class AstarAlgorithm : MonoBehaviour
     /// </summary>
     /// <param name="pos">近いノードがどこかを調べる対象の座標</param>
     /// <returns>指定した座標に最も近いノード</returns>
-    public Node NearestNode(Vector3 pos)
+    public Node NearestNode(GameObject pos)
     {
         Node result = null;
         float sqrtDistance = float.MaxValue;
         foreach (var node in _nodes)
         {
-            var compareSqrtDistance = Vector3.SqrMagnitude(node.transform.position - pos);
+            var compareSqrtDistance = Vector3.SqrMagnitude(node.transform.position - pos.transform.position);
             if (sqrtDistance > compareSqrtDistance)
             {
                 result = node;
@@ -75,11 +73,82 @@ public class AstarAlgorithm : MonoBehaviour
         return result;
     }
 
-    //public Vector3[] Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
-    //{
-    //    Debug.Log($"{start.name} => {goal.name}");
+    public List<Vector3> Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
+    {
+        Debug.Log($"{start.name} => {goal.name}");
+        //リスト作成
+        var openList = new PriorityQueue<Node, float>();
+        var closedList = new HashSet<Node>();
+        _record = new Dictionary<Node, AStarRecord>();
 
-    //}
+        //スタート設定
+        var newG = 0f;
+        var newH = Heuristic(startPos, goalPos);
+        var newF = newG + newH;
+        _record[start] = new(newG, newH, newF, null);
+        openList.Enqueue(start, newF);
+
+        while (openList.Count > 0)
+        {
+            var currentNode = openList.Dequeue();
+            if (currentNode.element == goal) return BuildPath(goal, goalPos);
+            if (currentNode.priority > _record[currentNode.element].F) continue;
+            closedList.Add(currentNode.element);
+
+            foreach (var adj in currentNode.element.Nodeds)
+            {
+                if (closedList.Contains(adj.Node)) continue;
+                newG = _record[currentNode.element].G + adj.Cost;
+                newH = Heuristic(adj.Node.transform.position, goalPos);
+                newF = newG + newH;
+                if (!_record.ContainsKey(adj.Node) || _record[adj.Node].F > newF)
+                {
+                    _record[adj.Node] = new(newG, newH, newF, currentNode.element);
+                    openList.Enqueue(adj.Node, newF);
+                }
+            }
+        }
+        return null;
+    }
+
+    float Heuristic(Vector3 a, Vector3 b)
+    {
+        return Vector3.SqrMagnitude(a - b);
+    }
+
+    List<Vector3> BuildPath(Node goal, Vector3 goalPos)
+    {
+        var path = new List<Vector3>() { goalPos };
+        var currentNode = _record[goal].Parent;
+        while (currentNode != null)
+        {
+            path.Add(currentNode.transform.position);
+            currentNode = _record[currentNode].Parent;
+        }
+        path.Reverse();
+        return path;
+    }
+}
+
+public class AStarRecord
+{
+    Node _parent;
+    float _g;
+    float _h;
+    float _f = float.MaxValue;
+
+    public Node Parent => _parent;
+    public float G => _g;
+    public float H => _h;
+    public float F => _f;
+
+    public AStarRecord(float g, float h, float f, Node parent)
+    {
+        _g = g;
+        _h = h;
+        _f = f;
+        _parent = parent;
+    }
 }
 
 public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TPriority>
@@ -93,21 +162,40 @@ public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TP
         EnqueueHeapify();
     }
 
-    public TElement Dequeue()
+    public (TElement element, TPriority priority) Dequeue()
     {
         if (_list.Count <= 0) throw new InvalidOperationException("PriorityQueue is empty");
+        BuildHeap();
         var index = _list.Count - 1;
         (_list[0], _list[index]) = (_list[index], _list[0]);
         var element = _list[index];
         _list.RemoveAt(index);
-        DequeueHeapify();
-        return element.element;
+        Heapify(0);
+        return element;
     }
 
-    public TElement Peek()
+    public (TElement element, TPriority priority) Peek()
     {
         if (_list.Count <= 0) throw new InvalidOperationException("PriorityQueue is empty");
-        return _list[0].element;
+        return _list[0];
+    }
+
+    public bool Contains(TElement element)
+    {
+        foreach (var item in _list)
+        {
+            if (item.Equals(element)) return true;
+        }
+        return false;
+    }
+
+    void BuildHeap()
+    {
+        var n = _list.Count;
+        for (int i = n / 2 - 1; i >= 0; i--)
+        {
+            Heapify(i);
+        }
     }
 
     void EnqueueHeapify()
@@ -115,17 +203,16 @@ public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TP
         int child = _list.Count - 1;
         while (true)
         {
+            if (child <= 0) break;
             int parent = (child - 1) / 2;
-            if (parent < 0) break;
             if (_list[parent].priority.CompareTo(_list[child].priority) < 0) break;
             (_list[parent], _list[child]) = (_list[child], _list[parent]);
             child = parent;
         }
     }
 
-    void DequeueHeapify()
+    void Heapify(int parent)
     {
-        int parent = 0;
         int size = _list.Count;
         while (true)
         {
