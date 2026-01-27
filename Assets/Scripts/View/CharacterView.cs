@@ -37,8 +37,8 @@ public class CharacterView : MonoBehaviour
         _dir = desired.normalized * _speed;
         _dir.y = _rb.linearVelocity.y;
         _rb.linearVelocity = _dir;
-        transform.forward = _dir;
         _agent.nextPosition = _rb.position;
+        if (_dir != Vector3.zero) transform.forward = _dir;
     }
 
     public void Move(Node target, Node goal, float speed)

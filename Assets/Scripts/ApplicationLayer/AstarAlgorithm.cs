@@ -73,7 +73,7 @@ public class AstarAlgorithm : MonoBehaviour
         return result;
     }
 
-    public List<Vector3> Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
+    public List<Node> Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
     {
         Debug.Log($"{start.name} => {goal.name}");
         //リスト作成
@@ -116,13 +116,13 @@ public class AstarAlgorithm : MonoBehaviour
         return Vector3.SqrMagnitude(a - b);
     }
 
-    List<Vector3> BuildPath(Node goal, Vector3 goalPos)
+    List<Node> BuildPath(Node goal, Vector3 goalPos)
     {
-        var path = new List<Vector3>() { goalPos };
+        var path = new List<Node>() { goal };
         var currentNode = _record[goal].Parent;
         while (currentNode != null)
         {
-            path.Add(currentNode.transform.position);
+            path.Add(currentNode);
             currentNode = _record[currentNode].Parent;
         }
         path.Reverse();
