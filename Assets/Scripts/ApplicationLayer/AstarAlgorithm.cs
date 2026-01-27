@@ -2,25 +2,14 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AStarAlgorithm : MonoBehaviour
+public class AStarAlgorithm
 {
     Node[] _nodes;
     Dictionary<Node, AStarRecord> _record;
 
-    static AStarAlgorithm _instance;
-    public static AStarAlgorithm Instance => _instance;
-    public void Init()
+    public AStarAlgorithm(Node[] nodes)
     {
-        if (_instance == null)
-        {
-            _instance = this;
-            _nodes = FindObjectsByType<Node>(FindObjectsSortMode.None);
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
+        _nodes = nodes;
     }
 
     /// <summary>
@@ -39,35 +28,6 @@ public class AStarAlgorithm : MonoBehaviour
             {
                 result = node;
                 sqrtDistance = compareSqrtDistance;
-            }
-        }
-        return result;
-    }
-
-    /// <summary>
-    /// 部分的A*アルゴリズム
-    /// </summary>
-    /// <param name="start">スタートノード</param>
-    /// <param name="goal">ゴールノード</param>
-    /// <returns>次に進むべきノード</returns>
-    public Node PartlyAstar(Node start, Node goal)
-    {
-        Debug.Log($"{start.name} => {goal.name}");
-        if (start == goal) return goal;
-        Node result = null;
-        float currentF = float.MaxValue;
-        //隣接ノードを調べる
-        foreach (var adj in start.Nodeds)
-        {
-            var newG = adj.Cost;
-            var newH = Vector3.SqrMagnitude(goal.transform.position - adj.Node.transform.position);
-            var newF = newG + newH;
-            if (result) Debug.Log($"{adj.Node.name} : {newF}\n{result.name} : {currentF}");
-            //現在の評価値より良いものが得られたら更新
-            if (currentF > newF)
-            {
-                currentF = newF;
-                result = adj.Node;
             }
         }
         return result;
@@ -92,7 +52,6 @@ public class AStarAlgorithm : MonoBehaviour
         {
             var currentNode = openList.Dequeue();
             if (currentNode.element == goal) return BuildPath(goal, goalPos);
-            if (currentNode.priority > _record[currentNode.element].F) continue;
             closedList.Add(currentNode.element);
 
             foreach (var adj in currentNode.element.Nodeds)
@@ -101,10 +60,18 @@ public class AStarAlgorithm : MonoBehaviour
                 newG = _record[currentNode.element].G + adj.Cost;
                 newH = Heuristic(adj.Node.transform.position, goalPos);
                 newF = newG + newH;
-                if (!_record.ContainsKey(adj.Node) || _record[adj.Node].F > newF)
+                var isNew = !_record.ContainsKey(adj.Node);
+                if (isNew || _record[adj.Node].F > newF)
                 {
                     _record[adj.Node] = new(newG, newH, newF, currentNode.element);
-                    openList.Enqueue(adj.Node, newF);
+                    if (isNew)
+                    {
+                        openList.Enqueue(adj.Node, newF);
+                    }
+                    else
+                    {
+                        openList.BuildHeap();
+                    }
                 }
             }
         }
@@ -165,7 +132,6 @@ public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TP
     public (TElement element, TPriority priority) Dequeue()
     {
         if (_list.Count <= 0) throw new InvalidOperationException("PriorityQueue is empty");
-        BuildHeap();
         var index = _list.Count - 1;
         (_list[0], _list[index]) = (_list[index], _list[0]);
         var element = _list[index];
@@ -189,7 +155,7 @@ public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TP
         return false;
     }
 
-    void BuildHeap()
+    public void BuildHeap()
     {
         var n = _list.Count;
         for (int i = n / 2 - 1; i >= 0; i--)
