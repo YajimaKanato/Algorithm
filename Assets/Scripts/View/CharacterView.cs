@@ -48,9 +48,9 @@ public class CharacterView : MonoBehaviour
         _isGoal = target == goal;
     }
 
-    public void LineSetting(List<Vector3> nodes, GameObject target)
+    public void LineSetting(List<Vector3> nodes, GameObject target, float speed)
     {
-        _line.LineSetting(nodes, target);
+        _line.LineSetting(nodes, target, speed);
     }
 
     public bool IsArrived()

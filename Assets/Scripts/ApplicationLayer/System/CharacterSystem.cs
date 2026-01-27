@@ -14,13 +14,14 @@ public class CharacterSystem
     public void Move<T>(int id, CharacterView view, GameObject start, GameObject goal) where T : CharacterRuntimeData
     {
         if (!_repository.TryGetData<T>(id, out var data)) return;
-        var startNode = AstarAlgorithm.Instance.NearestNode(start);
-        var goalNode = AstarAlgorithm.Instance.NearestNode(goal);
-        //var node = AstarAlgorithm.Instance.PartlyAstar(startNode, goalNode);
-        //Debug.Log($"target => {node.name}\ngoal => {goalNode.name}");
-        var nodes = AstarAlgorithm.Instance.Astar(startNode, goalNode, start.transform.position, goal.transform.position);
+        //最も近いノードを取得
+        var startNode = AStarAlgorithm.Instance.NearestNode(start);
+        var goalNode = AStarAlgorithm.Instance.NearestNode(goal);
+        //AStar実行
+        var nodes = AStarAlgorithm.Instance.AStar(startNode, goalNode, start.transform.position, goal.transform.position);
         if (nodes != null) Debug.Log(string.Join("->", nodes));
-        view.LineSetting(nodes.Select(n => n.transform.position).ToList(), goal);
+        //Viewに情報を送る
+        view.LineSetting(nodes.Select(n => n.transform.position).ToList(), goal, data.Speed);
         var node = nodes.Count > 1 ? nodes[1] : nodes[0];
         view.Move(node, goalNode, data.Speed);
     }

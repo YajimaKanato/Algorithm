@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    AstarAlgorithm _astrAlgorithm;
+    AStarAlgorithm _astrAlgorithm;
     RuntimeDataRepository _repository;
     CharacterSystem _characterSystem;
     CharacterPool[] _characterPools;
@@ -32,7 +32,7 @@ public class GameManager : MonoBehaviour
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
-        _astrAlgorithm = FindFirstObjectByType<AstarAlgorithm>();
+        _astrAlgorithm = FindFirstObjectByType<AStarAlgorithm>();
         _astrAlgorithm.Init();
         _characterPools = FindObjectsByType<CharacterPool>(FindObjectsSortMode.None);
         foreach (var pool in _characterPools)

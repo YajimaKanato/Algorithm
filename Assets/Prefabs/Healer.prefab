@@ -204,6 +204,46 @@ PrefabInstance:
       propertyPath: m_Name
       value: Line
       objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Positions.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Positions.Array.data[1].z
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.ctime1
+      value: 65535
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key0.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.g
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.key1.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3127134465277443541, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_Parameters.colorGradient.m_ColorSpace
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4133672899078682046, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: _view
       value: 

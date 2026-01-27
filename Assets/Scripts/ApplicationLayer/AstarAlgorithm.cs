@@ -2,13 +2,13 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AstarAlgorithm : MonoBehaviour
+public class AStarAlgorithm : MonoBehaviour
 {
     Node[] _nodes;
     Dictionary<Node, AStarRecord> _record;
 
-    static AstarAlgorithm _instance;
-    public static AstarAlgorithm Instance => _instance;
+    static AStarAlgorithm _instance;
+    public static AStarAlgorithm Instance => _instance;
     public void Init()
     {
         if (_instance == null)
@@ -73,7 +73,7 @@ public class AstarAlgorithm : MonoBehaviour
         return result;
     }
 
-    public List<Node> Astar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
+    public List<Node> AStar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
     {
         Debug.Log($"{start.name} => {goal.name}");
         //リスト作成

@@ -4,7 +4,7 @@ using UnityEngine;
 public class LineFlow : MonoBehaviour
 {
     [SerializeField] GameObject _view;
-    [SerializeField] float _speed = 1f;
+    float _speed;
     LineRenderer _lineRenderer;
     Material _material;
     GameObject _target;
@@ -27,12 +27,13 @@ public class LineFlow : MonoBehaviour
         if (_target) SetPosition();
     }
 
-    public void LineSetting(List<Vector3> nodes, GameObject target)
+    public void LineSetting(List<Vector3> nodes, GameObject target, float speed)
     {
         if (nodes == null || nodes.Count == 0) return;
         _lineRenderer.positionCount = nodes.Count;
         _lineRenderer.SetPositions(nodes.ToArray());
         _target = target;
+        _speed = speed;
         SetPosition();
     }
 
