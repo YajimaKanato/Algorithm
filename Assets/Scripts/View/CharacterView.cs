@@ -2,11 +2,12 @@ using UnityEngine;
 using UnityEngine.AI;
 using System.Collections.Generic;
 
-[RequireComponent(typeof(Rigidbody), typeof(NavMeshAgent))]
+[RequireComponent(typeof(Rigidbody), typeof(CapsuleCollider), typeof(NavMeshAgent))]
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] LineFlow _line;
     Rigidbody _rb;
+    Animator _animator;
     NavMeshAgent _agent;
     Vector3 _dir;
     float _speed;
@@ -18,6 +19,7 @@ public class CharacterView : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
+        _animator = GetComponent<Animator>();
 
         _agent.updatePosition = false;
         _agent.updateRotation = false;
@@ -39,6 +41,11 @@ public class CharacterView : MonoBehaviour
         _rb.linearVelocity = _dir;
         _agent.nextPosition = _rb.position;
         if (_dir != Vector3.zero) transform.forward = _dir;
+    }
+
+    private void LateUpdate()
+    {
+        if (_animator) _animator.SetFloat("Speed", _speed);
     }
 
     public void Move(Node target, Node goal, float speed)
