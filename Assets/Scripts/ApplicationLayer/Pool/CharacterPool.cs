@@ -5,9 +5,12 @@ public class CharacterPool : MonoBehaviour
 {
     [SerializeField] CharacterDefaultData _defaultData;
     [SerializeField] CharacterInput _character;
+    [SerializeField] Transform _transform;
     CharacterSystem _system;
     RuntimeDataRepository _repository;
     Queue<CharacterInput> _queue;
+
+    Vector3 _position;
 
     int _maxQueueCount = 10;
     int _nextID;
@@ -18,6 +21,7 @@ public class CharacterPool : MonoBehaviour
         _system = system;
         _repository = repository;
         _queue = new Queue<CharacterInput>();
+        _position = _transform.position;
         _isInit = true;
     }
 
@@ -34,11 +38,11 @@ public class CharacterPool : MonoBehaviour
         {
             go = _queue.Dequeue();
             go.gameObject.SetActive(true);
-            go.transform.position = new Vector3(0, 1, 0);
+            go.transform.position = _position;
         }
         else
         {
-            go = Instantiate(_character, new Vector3(0, 1, 0), Quaternion.identity);
+            go = Instantiate(_character, _position, Quaternion.identity);
             go.Init(_system, this);
         }
         _defaultData.CreateRuntimeData(_repository, _nextID);
