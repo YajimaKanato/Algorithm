@@ -6,6 +6,7 @@ using System.Collections.Generic;
 public class CharacterView : MonoBehaviour
 {
     [SerializeField] LineFlow _line;
+    [SerializeField] float _stopDistance = 0.2f;
     Rigidbody _rb;
     Animator _animator;
     NavMeshAgent _agent;
@@ -20,9 +21,11 @@ public class CharacterView : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
+        tag = "Character";
 
         _agent.updatePosition = false;
         _agent.updateRotation = false;
+        _agent.stoppingDistance = _stopDistance;
 
         _rb.isKinematic = false;
         _rb.constraints = RigidbodyConstraints.FreezeRotation;
@@ -39,6 +42,7 @@ public class CharacterView : MonoBehaviour
         _dir = desired.normalized * _speed;
         _dir.y = _rb.linearVelocity.y;
         _rb.linearVelocity = _dir;
+        _rb.AddForce(Vector3.down * 15, ForceMode.Force);
         _agent.nextPosition = _rb.position;
         if (_dir != Vector3.zero) transform.forward = _dir;
     }

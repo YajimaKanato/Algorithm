@@ -9,11 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b9b92b17ee20d174299fda4d99f24f5f, type: 3}
-  m_Name: WarriorDefaultData
-  m_EditorClassIdentifier: Assembly-CSharp::WarriorDefaultData
+  m_Script: {fileID: 11500000, guid: 006c69f400c557c4280ab807c65eef04, type: 3}
+  m_Name: HealerDefaultData
+  m_EditorClassIdentifier: Assembly-CSharp::HealerDefaultData
   _cost: 0
   _hp: 0
   _power: 0
   _defence: 0
-  _speed: 2
+  _speed: 4

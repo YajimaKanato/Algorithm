@@ -15,7 +15,6 @@ public class CameraController : MonoBehaviour
     {
         for (int i = 0; i < _cinemaChines.Length; i++)
         {
-            Debug.Log(_cinemaChines[i]);
             _cinemaChines[i].gameObject.SetActive(i == 0);
         }
         _followCamera.gameObject.SetActive(false);

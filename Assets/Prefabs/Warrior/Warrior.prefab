@@ -1719,7 +1719,7 @@ Transform:
   m_GameObject: {fileID: 6979762299739458939}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -43.88422, y: 50.044655, z: -43.505497}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1797,9 +1797,9 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 1.41
+  m_Height: 1.4
   m_Direction: 1
-  m_Center: {x: 0, y: 0.63, z: 0}
+  m_Center: {x: 0, y: 0.65, z: 0}
 --- !u!195 &-3665726535308885153
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1835,6 +1835,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
   _line: {fileID: 7190475683577661576}
+  _stopDistance: 0.4
 --- !u!114 &-7129852600375713736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2583,15 +2584,15 @@ PrefabInstance:
       objectReference: {fileID: 6979762299739458939}
     - target: {fileID: 7878620408038140191, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 11.960595
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878620408038140191, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -25.022327
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 7878620408038140191, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 8.455579
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7878620408038140191, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: m_LocalRotation.w
