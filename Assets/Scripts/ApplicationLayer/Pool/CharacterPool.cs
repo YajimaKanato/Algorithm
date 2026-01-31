@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +10,8 @@ public class CharacterPool : MonoBehaviour
     CharacterSystem _system;
     RuntimeDataRepository _repository;
     Queue<CharacterInput> _queue;
+
+    public static event Action SpawnAct;
 
     Vector3 _position;
 
@@ -48,6 +51,7 @@ public class CharacterPool : MonoBehaviour
         _defaultData.CreateRuntimeData(_repository, _nextID);
         go?.StatusReset(_nextID);
         _nextID++;
+        SpawnAct?.Invoke();
     }
 
     public void ReleaseToPool(CharacterInput character)

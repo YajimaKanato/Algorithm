@@ -21,7 +21,6 @@ public class CharacterView : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _agent = GetComponent<NavMeshAgent>();
         _animator = GetComponent<Animator>();
-        tag = "Character";
 
         _agent.updatePosition = false;
         _agent.updateRotation = false;

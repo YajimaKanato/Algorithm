@@ -13,11 +13,12 @@ public class CameraController : MonoBehaviour
 
     private void Start()
     {
+        _followCamera.gameObject.SetActive(false);
         for (int i = 0; i < _cinemaChines.Length; i++)
         {
             _cinemaChines[i].gameObject.SetActive(i == 0);
+            if (i == 0) _cinemaChines[i].GetComponent<CinemachineVirtualCameraBase>().Priority = 0;
         }
-        _followCamera.gameObject.SetActive(false);
         _actionAsset.FindAction("Click").started += Click;
     }
 

@@ -8,8 +8,10 @@ public class HealerInput : CharacterInput
         _characterSystem.Move<HealerRuntimeData>(_id, _characterView, gameObject, _target.gameObject);
     }
 
-    public override void TargetSetting()
+    public override GameObject TargetInfo()
     {
-        _target = _targets[Random.Range(0, _targets.Length)];
+        var targets = GameObject.FindGameObjectsWithTag("Enemy");
+        var target = targets.Length <= 0 ? null : targets[Random.Range(0, targets.Length)];
+        return target;
     }
 }

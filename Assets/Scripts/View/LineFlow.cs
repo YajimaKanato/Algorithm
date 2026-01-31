@@ -30,6 +30,7 @@ public class LineFlow : MonoBehaviour
     public void LineSetting(List<Vector3> nodes, GameObject target, float speed)
     {
         if (nodes == null || nodes.Count == 0) return;
+        if (nodes.Count == 1) nodes.Add(Vector3.zero);
         _lineRenderer.positionCount = nodes.Count;
         _lineRenderer.SetPositions(nodes.ToArray());
         _target = target;
@@ -40,7 +41,7 @@ public class LineFlow : MonoBehaviour
     void SetPosition()
     {
         if (_lineRenderer.positionCount <= 0) return;
-        _lineRenderer.SetPosition(0, _view.transform.position);
+        _lineRenderer.SetPosition(0, _view.transform.position + Vector3.up / 2);
         _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _target.transform.position);
     }
 }

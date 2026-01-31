@@ -1,13 +1,16 @@
 using UnityEngine;
+using System.Collections.Generic;
 
 [RequireComponent(typeof(CharacterView))]
 public abstract class CharacterInput : MonoBehaviour
 {
+    [SerializeField] SearchAreaInput _searchArea;
     protected CharacterSystem _characterSystem;
     protected CharacterView _characterView;
     protected CharacterPool _pool;
-    protected Node[] _targets;
-    protected Node _target;
+    protected Node[] _nodes;
+    protected GameObject _target;
+    List<GameObject> _targets;
 
     protected int _id;
     bool _isInit;
@@ -17,7 +20,10 @@ public abstract class CharacterInput : MonoBehaviour
         _characterSystem = characterSystem;
         _pool = pool;
         _characterView = GetComponent<CharacterView>();
-        _targets = FindObjectsByType<Node>(FindObjectsSortMode.None);
+        _nodes = FindObjectsByType<Node>(FindObjectsSortMode.None);
+        _targets = new List<GameObject>();
+        _searchArea.Init(this);
+        CharacterPool.SpawnAct += TargetSetting;
         _isInit = true;
     }
 
@@ -38,17 +44,34 @@ public abstract class CharacterInput : MonoBehaviour
         }
     }
 
-    public abstract void TargetSetting();
+    void TargetSetting()
+    {
+        _target = TargetInfo();
+        if (!_target) _target = _nodes[Random.Range(0, _nodes.Length)].gameObject;
+    }
+
+    public abstract GameObject TargetInfo();
 
     public abstract void MoveSetting();
 
+    public void RegisterTarget(GameObject target)
+    {
+        _targets.Add(target);
+    }
+
+    public void RemoveTarget(GameObject target)
+    {
+        _targets.Remove(target);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
-
+        if (collision.gameObject.CompareTag("Enemy") || collision.gameObject.CompareTag("Character")) ReleaseToPool();
     }
 
     void ReleaseToPool()
     {
+        CharacterPool.SpawnAct -= TargetSetting;
         _pool.ReleaseToPool(this);
     }
 }
