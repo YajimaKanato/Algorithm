@@ -4,9 +4,10 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CharacterView))]
 public abstract class CharacterInput : MonoBehaviour
 {
+    [SerializeField] PriorityData _priority;
     [SerializeField] SearchAreaInput _searchArea;
+    [SerializeField] protected CharacterView _characterView;
     protected CharacterSystem _characterSystem;
-    protected CharacterView _characterView;
     protected CharacterPool _pool;
     protected Node[] _nodes;
     protected GameObject _target;
@@ -19,7 +20,6 @@ public abstract class CharacterInput : MonoBehaviour
     {
         _characterSystem = characterSystem;
         _pool = pool;
-        _characterView = GetComponent<CharacterView>();
         _nodes = FindObjectsByType<Node>(FindObjectsSortMode.None);
         _targets = new List<GameObject>();
         _searchArea.Init(this);
@@ -57,11 +57,13 @@ public abstract class CharacterInput : MonoBehaviour
     public void RegisterTarget(GameObject target)
     {
         _targets.Add(target);
+        TargetSetting();
     }
 
     public void RemoveTarget(GameObject target)
     {
         _targets.Remove(target);
+        TargetSetting();
     }
 
     private void OnCollisionEnter(Collision collision)

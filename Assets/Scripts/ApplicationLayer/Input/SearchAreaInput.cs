@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class SearchAreaInput : MonoBehaviour
 {
+    [SerializeField] string _tagName;
     CharacterInput _input;
 
     public void Init(CharacterInput input)
@@ -12,12 +13,12 @@ public class SearchAreaInput : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var target = other.gameObject;
-        _input.RegisterTarget(target);
+        if (target.CompareTag(_tagName)) _input.RegisterTarget(target);
     }
 
     private void OnTriggerExit(Collider other)
     {
         var target = other.gameObject;
-        _input.RemoveTarget(target);
+        if (target.CompareTag(_tagName)) _input.RemoveTarget(target);
     }
 }

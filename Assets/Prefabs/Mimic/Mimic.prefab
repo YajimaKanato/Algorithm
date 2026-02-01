@@ -533,7 +533,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0031ddf519bce4e99a2de43616a996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MimicInput
+  _priority: {fileID: 0}
   _searchArea: {fileID: 3999344363087543736}
+  _characterView: {fileID: 4892271173199663530}
 --- !u!1 &4579808065447450596
 GameObject:
   m_ObjectHideFlags: 0
@@ -986,6 +988,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6014863304756037276}
     m_Modifications:
+    - target: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
+      propertyPath: _tagName
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 3137953825448495026, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
       propertyPath: m_Name
       value: SearchInput

@@ -1266,7 +1266,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98999b531c9800443866dce2cb0b4a0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::HeroInput
+  _priority: {fileID: 0}
   _searchArea: {fileID: 6612587442889829857}
+  _characterView: {fileID: -2926198426394471460}
 --- !u!1 &3113646163438896917
 GameObject:
   m_ObjectHideFlags: 0
@@ -3105,6 +3107,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 8744510762414363096}
     m_Modifications:
+    - target: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
+      propertyPath: _tagName
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3137953825448495026, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
       propertyPath: m_Name
       value: SearchInput

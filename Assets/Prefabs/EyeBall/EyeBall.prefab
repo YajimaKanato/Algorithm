@@ -1737,7 +1737,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d11303483013694bba98c284a1a0b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeBallInput
+  _priority: {fileID: 0}
   _searchArea: {fileID: 5606421755540821078}
+  _characterView: {fileID: 7232394074772277839}
 --- !u!1 &9166539647826173751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1778,6 +1780,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1225653838570407707}
     m_Modifications:
+    - target: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
+      propertyPath: _tagName
+      value: Character
+      objectReference: {fileID: 0}
     - target: {fileID: 3137953825448495026, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
       propertyPath: m_Name
       value: SearchInput

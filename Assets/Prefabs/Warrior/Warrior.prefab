@@ -1849,7 +1849,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42a684b0af8a50249885f499e9436218, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::WarriorInput
+  _priority: {fileID: 0}
   _searchArea: {fileID: 8285784938197032852}
+  _characterView: {fileID: 2233690274196676049}
 --- !u!1 &7089961350193410742
 GameObject:
   m_ObjectHideFlags: 0
@@ -2723,6 +2725,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 28474273620052421}
     m_Modifications:
+    - target: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
+      propertyPath: _tagName
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 3137953825448495026, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
       propertyPath: m_Name
       value: SearchInput
