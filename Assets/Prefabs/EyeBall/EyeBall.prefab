@@ -1737,9 +1737,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d11303483013694bba98c284a1a0b79, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::EyeBallInput
-  _priority: {fileID: 0}
-  _searchArea: {fileID: 5606421755540821078}
   _characterView: {fileID: 7232394074772277839}
+  _priorityType: 0
+  _priority: {fileID: 11400000, guid: 73b93246314fbaa4c85468d5bc519bea, type: 2}
+  _targetRange: 100
 --- !u!1 &9166539647826173751
 GameObject:
   m_ObjectHideFlags: 0
@@ -1842,17 +1843,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6445136200683051392, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
   m_PrefabInstance: {fileID: 5268107208552311148}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &5606421755540821078 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
-  m_PrefabInstance: {fileID: 5268107208552311148}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b541f84ba2f66cd4b9139bd288d0504f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SearchAreaInput
 --- !u!1001 &5588672584591459798
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -705,8 +705,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ce7ee1f502f94caa00e5870becf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
+  _dieObject: {fileID: 0}
   _line: {fileID: 551071025113797569}
   _stopDistance: 0.2
+  _attackRange: 1
 --- !u!114 &-7043457707217790632
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -719,9 +721,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 228939f1376af714cae88380dd7624ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CactusInput
-  _priority: {fileID: 0}
-  _searchArea: {fileID: 9208272545033659832}
   _characterView: {fileID: 524720371957914509}
+  _priorityType: 0
+  _priority: {fileID: 11400000, guid: a63e0c6e413121f4b92c11a3b44679c8, type: 2}
+  _targetRange: 50
 --- !u!1 &7056064568596425208
 GameObject:
   m_ObjectHideFlags: 0
@@ -995,14 +998,3 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 6445136200683051392, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
   m_PrefabInstance: {fileID: 8869921303987067010}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &9208272545033659832 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
-  m_PrefabInstance: {fileID: 8869921303987067010}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b541f84ba2f66cd4b9139bd288d0504f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SearchAreaInput

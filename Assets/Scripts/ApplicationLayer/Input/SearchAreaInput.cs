@@ -13,12 +13,10 @@ public class SearchAreaInput : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         var target = other.gameObject;
-        if (target.CompareTag(_tagName)) _input.RegisterTarget(target);
     }
 
     private void OnTriggerExit(Collider other)
     {
         var target = other.gameObject;
-        if (target.CompareTag(_tagName)) _input.RemoveTarget(target);
     }
 }

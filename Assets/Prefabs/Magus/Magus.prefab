@@ -446,9 +446,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9135ef04a6600684c937e1ae2dda078e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaguInput
-  _priority: {fileID: 0}
-  _searchArea: {fileID: 4055636864613989675}
   _characterView: {fileID: -974359698058089082}
+  _priorityType: 0
+  _priority: {fileID: 11400000, guid: 24f38700add4c604db508c223b2e4ced, type: 2}
+  _targetRange: 50
 --- !u!1 &1387983935748503658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2844,17 +2845,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
---- !u!114 &4055636864613989675 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
-  m_PrefabInstance: {fileID: 4366966909475520529}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b541f84ba2f66cd4b9139bd288d0504f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SearchAreaInput
 --- !u!4 &7344012538437556625 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6445136200683051392, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}

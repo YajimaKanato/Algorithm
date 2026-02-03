@@ -5,11 +5,11 @@ using UnityEngine;
 public class CharacterPool : MonoBehaviour
 {
     [SerializeField] CharacterDefaultData _defaultData;
-    [SerializeField] CharacterInput _character;
+    [SerializeField] MoveCharacterInput _character;
     [SerializeField] Transform _transform;
     CharacterSystem _system;
     RuntimeDataRepository _repository;
-    Queue<CharacterInput> _queue;
+    Queue<MoveCharacterInput> _queue;
 
     public static event Action SpawnAct;
 
@@ -23,7 +23,7 @@ public class CharacterPool : MonoBehaviour
     {
         _system = system;
         _repository = repository;
-        _queue = new Queue<CharacterInput>();
+        _queue = new();
         _position = _transform.position;
         _isInit = true;
     }
@@ -36,7 +36,7 @@ public class CharacterPool : MonoBehaviour
 
     public void Spawn()
     {
-        CharacterInput go;
+        MoveCharacterInput go;
         if (_queue.Count > 0)
         {
             go = _queue.Dequeue();
@@ -46,7 +46,8 @@ public class CharacterPool : MonoBehaviour
         else
         {
             go = Instantiate(_character, _position, Quaternion.identity);
-            go.Init(_system, this);
+            go.Init(_system);
+            go.PoolSetting(this);
         }
         _defaultData.CreateRuntimeData(_repository, _nextID);
         go?.StatusReset(_nextID);
@@ -54,7 +55,7 @@ public class CharacterPool : MonoBehaviour
         SpawnAct?.Invoke();
     }
 
-    public void ReleaseToPool(CharacterInput character)
+    public void ReleaseToPool(MoveCharacterInput character)
     {
         if (_queue.Count >= _maxQueueCount)
         {

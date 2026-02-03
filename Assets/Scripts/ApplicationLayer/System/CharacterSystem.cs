@@ -28,4 +28,14 @@ public class CharacterSystem
         var node = nodes.Count > 1 ? nodes[1] : nodes[0];
         view.Move(node, goalNode, data.Speed);
     }
+
+    public void Attack(CharacterView view)
+    {
+        view.Attack();
+    }
+
+    public void Die(CharacterView view)
+    {
+        view.Die();
+    }
 }

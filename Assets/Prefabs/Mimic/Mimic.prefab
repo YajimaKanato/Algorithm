@@ -533,9 +533,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0031ddf519bce4e99a2de43616a996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MimicInput
-  _priority: {fileID: 0}
-  _searchArea: {fileID: 3999344363087543736}
   _characterView: {fileID: 4892271173199663530}
+  _priorityType: 0
+  _priority: {fileID: 11400000, guid: f5f7359f0b1da8a4d8b6346f7fd38921, type: 2}
+  _targetRange: 40
 --- !u!1 &4579808065447450596
 GameObject:
   m_ObjectHideFlags: 0
@@ -1045,17 +1046,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
---- !u!114 &3999344363087543736 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 347359335944764730, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}
-  m_PrefabInstance: {fileID: 3698185350534660226}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b541f84ba2f66cd4b9139bd288d0504f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::SearchAreaInput
 --- !u!4 &7648008001060952322 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6445136200683051392, guid: 696a7a13daddbd64896f0a3c19f27307, type: 3}

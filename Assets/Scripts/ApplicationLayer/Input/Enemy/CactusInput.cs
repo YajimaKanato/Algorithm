@@ -1,16 +1,22 @@
 using UnityEngine;
 
-public class CactusInput : CharacterInput
+public class CactusInput : MoveCharacterInput
 {
     public override void MoveSetting()
     {
-        _characterSystem.Move<CactusRuntimeData>(_id, _characterView, gameObject, _target.gameObject);
+        _characterSystem.Move<CactusRuntimeData>(_id, _characterView, gameObject, _target ? _target.gameObject : GetRandomNode());
     }
 
-    public override GameObject TargetInfo()
+    protected override void Arrived()
     {
-        var targets = GameObject.FindGameObjectsWithTag("Character");
-        var target = targets.Length <= 0 ? null : targets[Random.Range(0, targets.Length)];
-        return target;
+        if (!_target) return;
+        switch (_target.PriorityType)
+        {
+            case PriorityType.Support:
+                _characterSystem.Attack(_characterView);
+                break;
+            case PriorityType.Treasure:
+                break;
+        }
     }
 }

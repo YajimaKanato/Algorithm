@@ -58,11 +58,11 @@ public class AStarAlgorithm
             {
                 if (closedList.Contains(adj.Node)) continue;
                 newG = _record[currentNode.element].G + adj.Cost;
-                newH = Heuristic(adj.Node.transform.position, goalPos);
-                newF = newG + newH;
                 var isNew = !_record.ContainsKey(adj.Node);
-                if (isNew || _record[adj.Node].F > newF)
+                if (isNew || _record[adj.Node].G > newG)
                 {
+                    newH = Heuristic(adj.Node.transform.position, goalPos);
+                    newF = newG + newH;
                     _record[adj.Node] = new(newG, newH, newF, currentNode.element);
                     if (isNew)
                     {

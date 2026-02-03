@@ -1,16 +1,27 @@
 using UnityEngine;
 
-public class MaguInput : CharacterInput
+public class MaguInput : MoveCharacterInput
 {
     public override void MoveSetting()
     {
-        _characterSystem.Move<MagusRuntimeData>(_id, _characterView, gameObject, _target.gameObject);
+        _characterSystem.Move<MagusRuntimeData>(_id, _characterView, gameObject, _target ? _target.gameObject : GetRandomNode());
     }
 
-    public override GameObject TargetInfo()
+    protected override void Arrived()
     {
-        var targets = GameObject.FindGameObjectsWithTag("Enemy");
-        var target = targets.Length <= 0 ? null : targets[Random.Range(0, targets.Length)];
-        return target;
+        switch (_target.PriorityType)
+        {
+            case PriorityType.Support:
+                break;
+            case PriorityType.Enemy:
+                _characterSystem.Attack(_characterView);
+                break;
+            case PriorityType.Tree:
+                break;
+            case PriorityType.Rock:
+                break;
+            case PriorityType.Grass:
+                break;
+        }
     }
 }

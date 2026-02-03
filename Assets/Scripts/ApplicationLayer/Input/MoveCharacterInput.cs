@@ -1,0 +1,68 @@
+using UnityEngine;
+
+public abstract class MoveCharacterInput : CharacterInput
+{
+    [SerializeField] PriorityData _priority;
+    [SerializeField] float _targetRange = 5f;
+    protected CharacterPool _pool;
+    protected Node[] _nodes;
+    protected CharacterInput _target;
+
+    public PriorityData Priority => _priority;
+    public float TargetRange => _targetRange;
+
+    public void PoolSetting(CharacterPool pool)
+    {
+        _pool = pool;
+        _nodes = FindObjectsByType<Node>(FindObjectsSortMode.None);
+    }
+
+    private void Update()
+    {
+        if (!_isInit) return;
+        if (_characterView.IsArrived())
+        {
+            //if (_characterView.IsGoal) TargetSetting();
+            if (_characterView.IsGoal)
+            {
+                Arrived();
+            }
+            else
+            {
+                MoveSetting();
+            }
+        }
+        if (_characterView.StateType == StateType.Die)
+        {
+            _characterSystem.Die(_characterView);
+            ReleaseToPool();
+        }
+    }
+
+    public override void StatusReset(int id)
+    {
+        base.StatusReset(id);
+        MoveSetting();
+        CharacterPool.SpawnAct += TargetSetting;
+    }
+
+    void TargetSetting()
+    {
+        _target = BlackBoard.GetTarget(this);
+    }
+
+    protected GameObject GetRandomNode()
+    {
+        return _nodes[Random.Range(0, _nodes.Length)].gameObject;
+    }
+
+    public abstract void MoveSetting();
+
+    protected abstract void Arrived();
+
+    void ReleaseToPool()
+    {
+        CharacterPool.SpawnAct -= TargetSetting;
+        _pool.ReleaseToPool(this);
+    }
+}

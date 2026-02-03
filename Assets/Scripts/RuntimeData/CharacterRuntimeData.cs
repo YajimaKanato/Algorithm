@@ -19,4 +19,6 @@ public class CharacterRuntimeData : IRuntime
         _hp -= damage;
         if (_hp < 0) _hp = 0;
     }
+
+
 }
