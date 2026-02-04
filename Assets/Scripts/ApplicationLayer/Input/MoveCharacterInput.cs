@@ -4,9 +4,11 @@ public abstract class MoveCharacterInput : CharacterInput
 {
     [SerializeField] PriorityData _priority;
     [SerializeField] float _targetRange = 5f;
+    [SerializeField] string _enemyTag;
     protected CharacterPool _pool;
     protected Node[] _nodes;
     protected CharacterInput _target;
+    protected GameObject _targetGameObject;
 
     public PriorityData Priority => _priority;
     public float TargetRange => _targetRange;
@@ -20,16 +22,22 @@ public abstract class MoveCharacterInput : CharacterInput
     private void Update()
     {
         if (!_isInit) return;
-        if (_characterView.IsArrived())
+        if (_characterView.IsGoalArrived)
         {
-            //if (_characterView.IsGoal) TargetSetting();
-            if (_characterView.IsGoal)
+            Arrived();
+        }
+        else
+        {
+            if (_characterView.IsArrived())
             {
-                Arrived();
-            }
-            else
-            {
-                MoveSetting();
+                if (_characterView.IsGoal)
+                {
+                    TargetSetting();
+                }
+                else
+                {
+                    MoveSetting();
+                }
             }
         }
         if (_characterView.StateType == StateType.Die)
@@ -49,6 +57,7 @@ public abstract class MoveCharacterInput : CharacterInput
     void TargetSetting()
     {
         _target = BlackBoard.GetTarget(this);
+        _targetGameObject = _target ? _target.gameObject : GetRandomNode();
     }
 
     protected GameObject GetRandomNode()
@@ -64,5 +73,15 @@ public abstract class MoveCharacterInput : CharacterInput
     {
         CharacterPool.SpawnAct -= TargetSetting;
         _pool.ReleaseToPool(this);
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag(tag)) TargetSetting();
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(_enemyTag)) Debug.Log($"{name} : Damage");
     }
 }

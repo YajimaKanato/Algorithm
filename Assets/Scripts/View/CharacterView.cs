@@ -12,13 +12,16 @@ public class CharacterView : MonoBehaviour
     Rigidbody _rb;
     Animator _animator;
     NavMeshAgent _agent;
+    GameObject _target;
     StateType _stateType = StateType.Idle;
     Vector3 _dir;
     float _speed;
     bool _isGoal;
+    bool _isArrived;
 
     public StateType StateType => _stateType;
     public bool IsGoal => _isGoal;
+    public bool IsGoalArrived => _isArrived;
 
     private void Awake()
     {
@@ -37,6 +40,28 @@ public class CharacterView : MonoBehaviour
     private void OnEnable()
     {
         _isGoal = false;
+        _isArrived = false;
+    }
+
+    private void Update()
+    {
+        if (_target)
+        {
+            if (_target.TryGetComponent<CharacterInput>(out var character))
+            {
+                _isArrived = _target && Vector3.Distance(transform.position, _target.transform.position) <= _attackRange;
+            }
+            else
+            {
+                _isArrived = false;
+            }
+        }
+        else
+        {
+            _isArrived = false;
+        }
+
+
     }
 
     private void FixedUpdate()
@@ -49,19 +74,13 @@ public class CharacterView : MonoBehaviour
         if (_animator) _animator.SetFloat("Speed", _speed);
     }
 
-    public void Move(Node target, Node goal, float speed)
+    public void Move(Node next, Node goal, GameObject target, float speed)
     {
-        _agent.SetDestination(target.transform.position);
+        if (_animator) _animator.SetBool("Attack", false);
+        _agent.SetDestination(next.transform.position);
         _speed = speed;
-        _isGoal = target == goal;
-        if (_isGoal)
-        {
-            _agent.stoppingDistance = _attackRange;
-        }
-        else
-        {
-            _agent.stoppingDistance = _stopDistance;
-        }
+        _isGoal = next == goal;
+        _target = target;
         _stateType = StateType.Move;
     }
 
@@ -80,7 +99,6 @@ public class CharacterView : MonoBehaviour
     {
         var desired = _agent.desiredVelocity;
         _dir = desired.normalized * _speed;
-        Debug.Log(_dir);
         _dir.y = _rb.linearVelocity.y;
         _rb.linearVelocity = _dir;
         _rb.AddForce(Vector3.down * 15, ForceMode.Force);
@@ -90,7 +108,10 @@ public class CharacterView : MonoBehaviour
 
     public void Attack()
     {
-        if (_animator) _animator.SetTrigger("Attack");
+        _speed = 0;
+        _rb.linearVelocity = Vector3.zero;
+        transform.forward = _target.transform.position - transform.position;
+        if (_animator) _animator.SetBool("Attack", true);
         _stateType = StateType.Attack;
     }
 

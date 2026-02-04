@@ -25,6 +25,7 @@ public static class BlackBoard
         foreach (var obj in targetList)
         {
             var newPriority = priority.GetPriority(obj.PriorityType);
+            Debug.Log(newPriority);
             if (currentPriority < newPriority)
             {
                 target = obj;

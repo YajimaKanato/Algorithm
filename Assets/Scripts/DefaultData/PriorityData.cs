@@ -17,7 +17,7 @@ public class PriorityData : ScriptableObject
                 _priority[keyValuePair.PriorityType] = keyValuePair.PriorityValue;
             }
         }
-        if (_priority.TryGetValue(priorityType, out int value)) return -1;
+        if (!_priority.TryGetValue(priorityType, out int value)) return -1;
         return value;
     }
 }

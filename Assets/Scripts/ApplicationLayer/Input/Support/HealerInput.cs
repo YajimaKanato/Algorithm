@@ -4,7 +4,8 @@ public class HealerInput : MoveCharacterInput
 {
     public override void MoveSetting()
     {
-        _characterSystem.Move<HealerRuntimeData>(_id, _characterView, gameObject, _target ? _target.gameObject : GetRandomNode());
+        if (!_targetGameObject) return;
+        _characterSystem.Move<HealerRuntimeData>(_id, _characterView, gameObject, _targetGameObject);
     }
 
     protected override void Arrived()

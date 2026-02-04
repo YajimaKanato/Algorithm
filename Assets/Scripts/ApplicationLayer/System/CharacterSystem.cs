@@ -26,7 +26,12 @@ public class CharacterSystem
         //Viewに情報を送る
         view.LineSetting(nodes.Select(n => n.transform.position).ToList(), goal, data.Speed);
         var node = nodes.Count > 1 ? nodes[1] : nodes[0];
-        view.Move(node, goalNode, data.Speed);
+        view.Move(node, goalNode, goal, data.Speed);
+    }
+
+    public void Damage<T>(int id) where T : CharacterRuntimeData
+    {
+        if (!_repository.TryGetData<T>(id, out var data)) return;
     }
 
     public void Attack(CharacterView view)
