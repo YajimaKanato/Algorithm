@@ -4,11 +4,14 @@ public abstract class MoveCharacterInput : CharacterInput
 {
     [SerializeField] PriorityData _priority;
     [SerializeField] float _targetRange = 5f;
-    [SerializeField] string _enemyTag;
+    [SerializeField] protected string _enemyTag;
+    [SerializeField] float _removeInterval = 1;
     protected CharacterPool _pool;
     protected Node[] _nodes;
     protected CharacterInput _target;
     protected GameObject _targetGameObject;
+
+    float _delta = 0;
 
     public PriorityData Priority => _priority;
     public float TargetRange => _targetRange;
@@ -22,42 +25,60 @@ public abstract class MoveCharacterInput : CharacterInput
     private void Update()
     {
         if (!_isInit) return;
-        if (_characterView.IsGoalArrived)
+
+        if (_characterView.StateType == StateType.Die)
         {
-            Arrived();
+            ReleaseToPool();
         }
         else
         {
-            if (_characterView.IsArrived())
+            if (_characterView.IsGoalArrived)
             {
-                if (_characterView.IsGoal)
+                Arrived();
+            }
+            else
+            {
+                if (_characterView.IsArrived())
                 {
-                    TargetSetting();
+                    if (_characterView.IsGoal)
+                    {
+                        _targetGameObject = null;
+                        TargetSetting();
+                    }
+                    _delta = 0;
+                    MoveSetting();
                 }
-                else
+
+                _delta += Time.deltaTime;
+                if (_delta >= _removeInterval)
                 {
+                    _delta = 0;
+                    TargetSetting();
                     MoveSetting();
                 }
             }
         }
-        if (_characterView.StateType == StateType.Die)
-        {
-            _characterSystem.Die(_characterView);
-            ReleaseToPool();
-        }
     }
 
-    public override void StatusReset(int id)
+    public override void StatusReset(int id, CharacterRuntimeData runtime)
     {
-        base.StatusReset(id);
+        base.StatusReset(id, runtime);
         MoveSetting();
         CharacterPool.SpawnAct += TargetSetting;
     }
 
     void TargetSetting()
     {
-        _target = BlackBoard.GetTarget(this);
-        _targetGameObject = _target ? _target.gameObject : GetRandomNode();
+        var newTarget = BlackBoard.GetTarget(this);
+        if (newTarget)
+        {
+            _target = newTarget;
+            _targetGameObject = newTarget.gameObject;
+        }
+        else
+        {
+            _targetGameObject ??= GetRandomNode();
+        }
     }
 
     protected GameObject GetRandomNode()
@@ -75,13 +96,8 @@ public abstract class MoveCharacterInput : CharacterInput
         _pool.ReleaseToPool(this);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnCollisionStay(Collision collision)
     {
         if (collision.gameObject.CompareTag(tag)) TargetSetting();
-    }
-
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.CompareTag(_enemyTag)) Debug.Log($"{name} : Damage");
     }
 }

@@ -519,7 +519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ce7ee1f502f94caa00e5870becf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
-  _dieObject: {fileID: 0}
+  _dieObject: {fileID: 6471293706594679389, guid: 968c3e0054cb4ce4aa4c88ef644b3b46, type: 3}
   _line: {fileID: 6292930637559489635}
   _stopDistance: 1
   _attackRange: 2
@@ -535,11 +535,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9d0031ddf519bce4e99a2de43616a996, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MimicInput
+  _attackField: {fileID: 4664427107381991802}
   _characterView: {fileID: 4892271173199663530}
   _priorityType: 1
   _priority: {fileID: 11400000, guid: f5f7359f0b1da8a4d8b6346f7fd38921, type: 2}
   _targetRange: 40
   _enemyTag: CharacterField
+  _removeInterval: 1
 --- !u!1 &4579808065447450596
 GameObject:
   m_ObjectHideFlags: 0
@@ -992,6 +994,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 6014863304756037276}
     m_Modifications:
+    - target: {fileID: 1598840149512771278, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
+      propertyPath: m_Size.z
+      value: 1.71
+      objectReference: {fileID: 0}
     - target: {fileID: 5157777275817110590, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
       propertyPath: m_Name
       value: AttackField
@@ -1010,7 +1016,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 1.37
+      value: 1.6
       objectReference: {fileID: 0}
     - target: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1045,6 +1051,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
+--- !u!114 &4664427107381991802 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7896050144059426817, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
+  m_PrefabInstance: {fileID: 3255883147641966971}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed544e7ae8adc943b076b755ab4872c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackField
 --- !u!4 &8331232019658750856 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}

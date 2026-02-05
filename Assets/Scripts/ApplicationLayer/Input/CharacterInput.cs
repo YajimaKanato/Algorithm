@@ -4,15 +4,19 @@ using System.Collections.Generic;
 [RequireComponent(typeof(CharacterView))]
 public class CharacterInput : MonoBehaviour
 {
+    [SerializeField] AttackField _attackField;
     [SerializeField] protected CharacterView _characterView;
     [SerializeField] protected PriorityType _priorityType;
 
     protected CharacterSystem _characterSystem;
+    CharacterRuntimeData _runtime;
 
     protected int _id;
     protected bool _isInit;
 
+    public AttackField AttackField => _attackField;
     public PriorityType PriorityType => _priorityType;
+    public CharacterRuntimeData Runtime => _runtime;
 
     public void Init(CharacterSystem characterSystem)
     {
@@ -40,8 +44,10 @@ public class CharacterInput : MonoBehaviour
         BlackBoard.ObjectRemove(this);
     }
 
-    public virtual void StatusReset(int id)
+    public virtual void StatusReset(int id, CharacterRuntimeData runtime)
     {
         _id = id;
+        _runtime = runtime;
+        _attackField.Init(runtime);
     }
 }

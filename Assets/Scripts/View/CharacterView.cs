@@ -49,7 +49,7 @@ public class CharacterView : MonoBehaviour
         {
             if (_target.TryGetComponent<CharacterInput>(out var character))
             {
-                _isArrived = _target && Vector3.Distance(transform.position, _target.transform.position) <= _attackRange;
+                _isArrived = _target && _target.activeSelf && Vector3.Distance(transform.position, _target.transform.position) <= _attackRange;
             }
             else
             {
@@ -60,8 +60,6 @@ public class CharacterView : MonoBehaviour
         {
             _isArrived = false;
         }
-
-
     }
 
     private void FixedUpdate()

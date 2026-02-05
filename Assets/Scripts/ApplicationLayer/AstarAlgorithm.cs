@@ -35,7 +35,6 @@ public class AStarAlgorithm
 
     public List<Node> AStar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
     {
-        Debug.Log($"{start.name} => {goal.name}");
         //リスト作成
         var openList = new PriorityQueue<Node, float>();
         var closedList = new HashSet<Node>();

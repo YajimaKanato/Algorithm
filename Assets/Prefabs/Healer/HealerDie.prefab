@@ -296,6 +296,7 @@ GameObject:
   - component: {fileID: 5392321554304705550}
   - component: {fileID: 4269723048699746509}
   - component: {fileID: 5170600219212535459}
+  - component: {fileID: -7023202381028302258}
   m_Layer: 0
   m_Name: HealerDie
   m_TagString: Untagged
@@ -365,6 +366,18 @@ CapsuleCollider:
   m_Height: 1.882848
   m_Direction: 1
   m_Center: {x: 0, y: 0.98, z: 0}
+--- !u!114 &-7023202381028302258
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1062374642733829067}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ee4c043e3596644bf6bdb5c74152f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DieObject
 --- !u!1 &1387983935748503658
 GameObject:
   m_ObjectHideFlags: 0

@@ -29,18 +29,16 @@ public class CharacterSystem
         view.Move(node, goalNode, goal, data.Speed);
     }
 
-    public void Damage<T>(int id) where T : CharacterRuntimeData
+    public void Damage<T>(int id, CharacterRuntimeData runtime, CharacterView view) where T : CharacterRuntimeData
     {
         if (!_repository.TryGetData<T>(id, out var data)) return;
+        if(runtime == null) return;
+        data.TakeDamage(runtime.Power);
+        if (data.HP <= 0) view.Die();
     }
 
     public void Attack(CharacterView view)
     {
         view.Attack();
-    }
-
-    public void Die(CharacterView view)
-    {
-        view.Die();
     }
 }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HeroDefaultData
   m_EditorClassIdentifier: Assembly-CSharp::HeroDefaultData
   _cost: 0
-  _hp: 0
-  _power: 0
+  _hp: 100
+  _power: 5
   _defence: 0
   _speed: 7

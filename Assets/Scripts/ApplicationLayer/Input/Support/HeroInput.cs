@@ -25,4 +25,12 @@ public class HeroInput : MoveCharacterInput
                 break;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.gameObject.CompareTag(_enemyTag))
+        {
+            _characterSystem.Damage<HeroRuntimeData>(_id, other.GetComponent<AttackField>().Runtime, _characterView);
+        }
+    }
 }

@@ -9,23 +9,25 @@ public static class BlackBoard
     {
         if (_sceneObjects.Count <= 0) return null;
         var targetList = new List<CharacterInput>();
+        var range = input.TargetRange * input.TargetRange;
         foreach (var obj in _sceneObjects)
         {
             if (obj == input) continue;
-            if (Vector3.SqrMagnitude(input.transform.position - obj.transform.position) < input.TargetRange * input.TargetRange)
+            if (Vector3.SqrMagnitude(input.transform.position - obj.transform.position) < range)
             {
                 targetList.Add(obj);
             }
         }
         if (targetList.Count <= 0) return null;
 
-        var priority = input.Priority;
-        var currentPriority = -1;
+        var priorities = input.Priority;
+        var currentPriority = -1f;
         CharacterInput target = null;
         foreach (var obj in targetList)
         {
-            var newPriority = priority.GetPriority(obj.PriorityType);
-            Debug.Log(newPriority);
+            var priority = priorities.GetPriority(obj.PriorityType);
+            if (priority == -1) continue;
+            var newPriority = priority + range - Vector3.SqrMagnitude(input.transform.position - obj.transform.position);
             if (currentPriority < newPriority)
             {
                 target = obj;

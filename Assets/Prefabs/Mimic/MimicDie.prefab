@@ -697,6 +697,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8741342421382384129}
   - component: {fileID: 8274276423018493828}
+  - component: {fileID: -3077030100074995529}
   m_Layer: 0
   m_Name: MimicDie
   m_TagString: Untagged
@@ -743,6 +744,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &-3077030100074995529
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6471293706594679389}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94ee4c043e3596644bf6bdb5c74152f3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::DieObject
 --- !u!1 &7285035476955100872
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::PriorityData
   _priorities:
   - _priorityType: 0
-    _priorityValue: 3
+    _priorityValue: -1
   - _priorityType: 1
     _priorityValue: 2
   - _priorityType: 2

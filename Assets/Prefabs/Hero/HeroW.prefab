@@ -1251,7 +1251,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ce7ee1f502f94caa00e5870becf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
-  _dieObject: {fileID: 0}
+  _dieObject: {fileID: 3096577096793199236, guid: 5dccf16aaa4cd1a4cba31caf7e8471a4, type: 3}
   _line: {fileID: 2696483445006533012}
   _stopDistance: 1
   _attackRange: 2

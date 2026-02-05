@@ -432,10 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b50ce7ee1f502f94caa00e5870becf67, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CharacterView
-  _dieObject: {fileID: 0}
+  _dieObject: {fileID: 1062374642733829067, guid: bc6193485b1f3734e9b7d584d45f2a43, type: 3}
   _line: {fileID: 2264813578749808404}
   _stopDistance: 1
-  _attackRange: 3
+  _attackRange: 5
 --- !u!114 &-6965276130167038985
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -448,11 +448,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9135ef04a6600684c937e1ae2dda078e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::MaguInput
+  _attackField: {fileID: 5554012916768393361}
   _characterView: {fileID: -974359698058089082}
   _priorityType: 0
   _priority: {fileID: 11400000, guid: 24f38700add4c604db508c223b2e4ced, type: 2}
   _targetRange: 50
   _enemyTag: EnemyField
+  _removeInterval: 1
 --- !u!1 &1387983935748503658
 GameObject:
   m_ObjectHideFlags: 0
@@ -2736,7 +2738,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.02
+      value: 2.07
       objectReference: {fileID: 0}
     - target: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
       propertyPath: m_LocalRotation.w
@@ -2771,6 +2773,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
+--- !u!114 &5554012916768393361 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7896050144059426817, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}
+  m_PrefabInstance: {fileID: 2344042891140972688}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ed544e7ae8adc943b076b755ab4872c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AttackField
 --- !u!4 &9094726489445968483 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6823308687185013491, guid: 92de285bbeaee2641a18701a4ac1c098, type: 3}

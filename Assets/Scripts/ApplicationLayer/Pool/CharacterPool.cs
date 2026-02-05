@@ -49,8 +49,7 @@ public class CharacterPool : MonoBehaviour
             go.Init(_system);
             go.PoolSetting(this);
         }
-        _defaultData.CreateRuntimeData(_repository, _nextID);
-        go?.StatusReset(_nextID);
+        go?.StatusReset(_nextID, _defaultData.CreateRuntimeData(_repository, _nextID));
         _nextID++;
         SpawnAct?.Invoke();
     }
@@ -66,5 +65,10 @@ public class CharacterPool : MonoBehaviour
             _queue.Enqueue(character);
             character.gameObject.SetActive(false);
         }
+    }
+
+    public void DummyFunc()
+    {
+
     }
 }
