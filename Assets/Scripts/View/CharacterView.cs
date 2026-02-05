@@ -75,10 +75,17 @@ public class CharacterView : MonoBehaviour
     public void Move(Node next, Node goal, GameObject target, float speed)
     {
         if (_animator) _animator.SetBool("Attack", false);
-        _agent.SetDestination(next.transform.position);
-        _speed = speed;
         _isGoal = next == goal;
         _target = target;
+        _speed = speed;
+        if (_isGoal)
+        {
+            _agent.SetDestination(target.transform.position);
+        }
+        else
+        {
+            _agent.SetDestination(next.transform.position);
+        }
         _stateType = StateType.Move;
     }
 

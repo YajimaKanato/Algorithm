@@ -43,9 +43,9 @@ public abstract class MoveCharacterInput : CharacterInput
                     if (_characterView.IsGoal)
                     {
                         _targetGameObject = null;
-                        TargetSetting();
                     }
                     _delta = 0;
+                    TargetSetting();
                     MoveSetting();
                 }
 

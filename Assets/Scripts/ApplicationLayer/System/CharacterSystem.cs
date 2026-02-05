@@ -20,6 +20,7 @@ public class CharacterSystem
         //最も近いノードを取得
         var startNode = astar.NearestNode(start);
         var goalNode = astar.NearestNode(goal);
+        Debug.Log($"{startNode} => {goalNode}");
         //AStar実行
         var nodes = astar.AStar(startNode, goalNode, start.transform.position, goal.transform.position);
         if (nodes != null) Debug.Log(string.Join("->", nodes));
