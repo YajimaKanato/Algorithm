@@ -15,6 +15,7 @@ public class CharacterInput : MonoBehaviour
     protected bool _isInit;
 
     public AttackField AttackField => _attackField;
+    public StateType StateType => _characterView.StateType;
     public PriorityType PriorityType => _priorityType;
     public CharacterRuntimeData Runtime => _runtime;
 

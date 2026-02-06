@@ -12,9 +12,11 @@ public static class BlackBoard
         var range = input.TargetRange * input.TargetRange;
         foreach (var obj in _sceneObjects)
         {
+            if (!obj) continue;
             if (obj == input) continue;
             if (Vector3.SqrMagnitude(input.transform.position - obj.transform.position) < range)
             {
+                if (obj.StateType == StateType.Attack) continue;
                 targetList.Add(obj);
             }
         }

@@ -92,8 +92,17 @@ public abstract class MoveCharacterInput : CharacterInput
 
     void ReleaseToPool()
     {
-        CharacterPool.SpawnAct -= TargetSetting;
         _pool.ReleaseToPool(this);
+    }
+
+    private void OnDisable()
+    {
+        CharacterPool.SpawnAct -= TargetSetting;
+    }
+
+    private void OnDestroy()
+    {
+        CharacterPool.SpawnAct -= TargetSetting;
     }
 
     private void OnCollisionStay(Collision collision)
