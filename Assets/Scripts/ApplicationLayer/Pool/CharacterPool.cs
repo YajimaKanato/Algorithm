@@ -45,7 +45,7 @@ public class CharacterPool : MonoBehaviour
         }
         else
         {
-            go = Instantiate(_character, _position, Quaternion.identity);
+            go = Instantiate(_character, _position, Quaternion.identity, transform);
             go.Init(_system);
             go.PoolSetting(this);
         }
@@ -70,5 +70,15 @@ public class CharacterPool : MonoBehaviour
     public void DummyFunc()
     {
 
+    }
+
+    private void OnDisable()
+    {
+        SpawnAct = null;
+    }
+
+    private void OnDestroy()
+    {
+        SpawnAct = null;
     }
 }
