@@ -568,7 +568,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1033767626041515423}
   - component: {fileID: 2998200120611252907}
-  - component: {fileID: -6217749786452682534}
   - component: {fileID: -8956993832976104693}
   - component: {fileID: -8215293343975347859}
   - component: {fileID: 524720371957914509}
@@ -621,33 +620,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!54 &-6217749786452682534
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6748321721847902534}
-  serializedVersion: 5
-  m_Mass: 1
-  m_LinearDamping: 0
-  m_AngularDamping: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 0
-  m_CollisionDetection: 0
 --- !u!136 &-8956993832976104693
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -865,6 +837,10 @@ PrefabInstance:
     - target: {fileID: 3092682642339572190, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: m_Name
       value: Line
+      objectReference: {fileID: 0}
+    - target: {fileID: 3092682642339572190, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4133672899078682046, guid: 0025b9a900a6fc74bbbbbe51088359a4, type: 3}
       propertyPath: _view

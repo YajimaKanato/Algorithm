@@ -44,4 +44,14 @@ public class LineFlow : MonoBehaviour
         _lineRenderer.SetPosition(0, _view.transform.position);
         _lineRenderer.SetPosition(_lineRenderer.positionCount - 1, _target.transform.position);
     }
+
+    private void OnDisable()
+    {
+        _lineRenderer.positionCount = 0;
+    }
+
+    private void OnDestroy()
+    {
+        _lineRenderer.positionCount = 0;
+    }
 }

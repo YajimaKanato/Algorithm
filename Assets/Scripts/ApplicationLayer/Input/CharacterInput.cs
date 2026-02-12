@@ -35,6 +35,11 @@ public class CharacterInput : MonoBehaviour
         OnDeactivate();
     }
 
+    private void OnDestroy()
+    {
+        OnDeactivate();
+    }
+
     protected virtual void OnActivate()
     {
         BlackBoard.ObjectRegister(this);

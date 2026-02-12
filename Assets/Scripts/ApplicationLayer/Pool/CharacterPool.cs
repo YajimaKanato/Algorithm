@@ -4,38 +4,33 @@ using UnityEngine;
 
 public class CharacterPool : MonoBehaviour
 {
+    [SerializeField] int _maxSpawn = 10;
     [SerializeField] CharacterDefaultData _defaultData;
     [SerializeField] MoveCharacterInput _character;
     [SerializeField] Transform _transform;
     CharacterSystem _system;
     RuntimeDataRepository _repository;
     Queue<MoveCharacterInput> _queue;
-
-    public static event Action SpawnAct;
+    Node[] _nodes;
 
     Vector3 _position;
 
+    int _spawnCount = 0;
     int _maxQueueCount = 10;
     int _nextID;
-    bool _isInit;
 
-    public void Init(CharacterSystem system, RuntimeDataRepository repository)
+    public void Init(CharacterSystem system, RuntimeDataRepository repository, Node[] nodes)
     {
         _system = system;
         _repository = repository;
         _queue = new();
         _position = _transform.position;
-        _isInit = true;
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (!_isInit) return;
+        _nodes = nodes;
     }
 
     public void Spawn()
     {
+        if (_spawnCount >= _maxSpawn) return;
         MoveCharacterInput go;
         if (_queue.Count > 0)
         {
@@ -47,24 +42,27 @@ public class CharacterPool : MonoBehaviour
         {
             go = Instantiate(_character, _position, Quaternion.identity, transform);
             go.Init(_system);
-            go.PoolSetting(this);
+            go.PoolSetting(this, _nodes);
         }
         go?.StatusReset(_nextID, _defaultData.CreateRuntimeData(_repository, _nextID));
         _nextID++;
-        SpawnAct?.Invoke();
+        _spawnCount++;
     }
 
-    public void ReleaseToPool(MoveCharacterInput character)
+    public void ReleaseToPool(MoveCharacterInput character, int id)
     {
         if (_queue.Count >= _maxQueueCount)
         {
             Destroy(character);
+            character = null;
         }
         else
         {
             _queue.Enqueue(character);
             character.gameObject.SetActive(false);
         }
+        _defaultData.RemoveRuntimeData(_repository, id);
+        _spawnCount--;
     }
 
     public void DummyFunc()
@@ -74,11 +72,13 @@ public class CharacterPool : MonoBehaviour
 
     private void OnDisable()
     {
-        SpawnAct = null;
+        _queue = null;
+        Debug.Log($"{name} : Remove");
     }
 
     private void OnDestroy()
     {
-        SpawnAct = null;
+        _queue = null;
+        Debug.Log($"{name} : Remove");
     }
 }

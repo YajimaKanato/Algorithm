@@ -5,18 +5,15 @@ using UnityEngine;
 public class CharacterSystem
 {
     RuntimeDataRepository _repository;
-    Node[] _nodes;
 
-    public CharacterSystem(RuntimeDataRepository repository, Node[] nodes)
+    public CharacterSystem(RuntimeDataRepository repository)
     {
         _repository = repository;
-        _nodes = nodes;
     }
 
-    public void Move<T>(int id, CharacterView view, GameObject start, GameObject goal) where T : CharacterRuntimeData
+    public void Move<T>(int id, CharacterView view, GameObject start, GameObject goal, AStarAlgorithm astar) where T : CharacterRuntimeData
     {
         if (!_repository.TryGetData<T>(id, out var data)) return;
-        var astar = new AStarAlgorithm(_nodes);
         //最も近いノードを取得
         var startNode = astar.NearestNode(start);
         var goalNode = astar.NearestNode(goal);
@@ -33,7 +30,7 @@ public class CharacterSystem
     public void Damage<T>(int id, CharacterRuntimeData runtime, CharacterView view) where T : CharacterRuntimeData
     {
         if (!_repository.TryGetData<T>(id, out var data)) return;
-        if(runtime == null) return;
+        if (runtime == null) return;
         data.TakeDamage(runtime.Power);
         if (data.HP <= 0) view.Die();
     }

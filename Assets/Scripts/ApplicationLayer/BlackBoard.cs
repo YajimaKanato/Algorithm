@@ -16,7 +16,6 @@ public static class BlackBoard
             if (obj == input) continue;
             if (Vector3.SqrMagnitude(input.transform.position - obj.transform.position) < range)
             {
-                if (obj.StateType == StateType.Attack) continue;
                 targetList.Add(obj);
             }
         }
@@ -47,5 +46,10 @@ public static class BlackBoard
     public static void ObjectRemove(CharacterInput input)
     {
         if (_sceneObjects.Contains(input)) _sceneObjects.Remove(input);
+    }
+
+    public static void Clear()
+    {
+        _sceneObjects.Clear();
     }
 }

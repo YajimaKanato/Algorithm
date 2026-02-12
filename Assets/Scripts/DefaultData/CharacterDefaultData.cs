@@ -15,4 +15,6 @@ public abstract class CharacterDefaultData : ScriptableObject, IDefault
     public float Speed => _speed;
 
     public abstract CharacterRuntimeData CreateRuntimeData(RuntimeDataRepository repository, int id);
+
+    public abstract void RemoveRuntimeData(RuntimeDataRepository repository, int id);
 }

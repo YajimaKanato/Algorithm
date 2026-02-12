@@ -5,10 +5,15 @@ public class HeroDefaultData : CharacterDefaultData
 {
     public override CharacterRuntimeData CreateRuntimeData(RuntimeDataRepository repository, int id)
     {
-        if (repository.TryGetData<HeroRuntimeData>(id, out _)) return null;
+        if (repository.TryGetData<HeroRuntimeData>(id, out var data)) return data;
 
-        var data = new HeroRuntimeData(this);
+        data = new HeroRuntimeData(this);
         repository.RegisterData(id, data);
         return data;
+    }
+
+    public override void RemoveRuntimeData(RuntimeDataRepository repository, int id)
+    {
+        repository.RemoveData<HeroRuntimeData>(id);
     }
 }

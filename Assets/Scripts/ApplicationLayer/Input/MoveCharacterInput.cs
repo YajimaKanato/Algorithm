@@ -10,16 +10,18 @@ public abstract class MoveCharacterInput : CharacterInput
     protected Node[] _nodes;
     protected CharacterInput _target;
     protected GameObject _targetGameObject;
+    protected AStarAlgorithm _astar;
 
     float _delta = 0;
 
     public PriorityData Priority => _priority;
     public float TargetRange => _targetRange;
 
-    public void PoolSetting(CharacterPool pool)
+    public void PoolSetting(CharacterPool pool, Node[] nodes)
     {
         _pool = pool;
-        _nodes = FindObjectsByType<Node>(FindObjectsSortMode.None);
+        _nodes = nodes;
+        _astar = new AStarAlgorithm(_nodes);
     }
 
     private void Update()
@@ -34,6 +36,7 @@ public abstract class MoveCharacterInput : CharacterInput
         {
             if (_characterView.IsGoalArrived)
             {
+                Debug.Log("Arrived at Character");
                 Arrived();
             }
             else
@@ -42,6 +45,7 @@ public abstract class MoveCharacterInput : CharacterInput
                 {
                     if (_characterView.IsGoal)
                     {
+                        Debug.Log("Arrived at Target");
                         _targetGameObject = null;
                     }
                     _delta = 0;
@@ -64,7 +68,6 @@ public abstract class MoveCharacterInput : CharacterInput
     {
         base.StatusReset(id, runtime);
         MoveSetting();
-        CharacterPool.SpawnAct += TargetSetting;
     }
 
     void TargetSetting()
@@ -92,17 +95,7 @@ public abstract class MoveCharacterInput : CharacterInput
 
     void ReleaseToPool()
     {
-        _pool.ReleaseToPool(this);
-    }
-
-    private void OnDisable()
-    {
-        CharacterPool.SpawnAct -= TargetSetting;
-    }
-
-    private void OnDestroy()
-    {
-        CharacterPool.SpawnAct -= TargetSetting;
+        _pool.ReleaseToPool(this, _id);
     }
 
     private void OnCollisionStay(Collision collision)

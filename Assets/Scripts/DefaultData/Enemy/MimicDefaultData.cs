@@ -5,10 +5,15 @@ public class MimicDefaultData : CharacterDefaultData
 {
     public override CharacterRuntimeData CreateRuntimeData(RuntimeDataRepository repository, int id)
     {
-        if (repository.TryGetData<MimicRuntimeData>(id, out _)) return null;
+        if (repository.TryGetData<MimicRuntimeData>(id, out var data)) return data;
 
-        var data = new MimicRuntimeData(this);
+        data = new MimicRuntimeData(this);
         repository.RegisterData(id, data);
         return data;
+    }
+
+    public override void RemoveRuntimeData(RuntimeDataRepository repository, int id)
+    {
+        repository.RemoveData<MimicRuntimeData>(id);
     }
 }

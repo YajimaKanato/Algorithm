@@ -5,7 +5,7 @@ public class MimicInput : MoveCharacterInput
     public override void MoveSetting()
     {
         if (!_targetGameObject) return;
-        _characterSystem.Move<MimicRuntimeData>(_id, _characterView, gameObject, _targetGameObject);
+        _characterSystem.Move<MimicRuntimeData>(_id, _characterView, gameObject, _targetGameObject, _astar);
     }
 
     protected override void Arrived()

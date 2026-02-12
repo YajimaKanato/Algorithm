@@ -4,11 +4,19 @@ using UnityEngine;
 
 public class AStarAlgorithm
 {
+    Node _result;
     Node[] _nodes;
     Dictionary<Node, AStarRecord> _record;
+    PriorityQueue<Node, float> _openList;
+    HashSet<Node> _closedList;
+    List<Node> _path;
 
     public AStarAlgorithm(Node[] nodes)
     {
+        _openList = new PriorityQueue<Node, float>();
+        _closedList = new HashSet<Node>();
+        _record = new Dictionary<Node, AStarRecord>();
+        _path = new List<Node>();
         _nodes = nodes;
     }
 
@@ -19,43 +27,43 @@ public class AStarAlgorithm
     /// <returns>指定した座標に最も近いノード</returns>
     public Node NearestNode(GameObject pos)
     {
-        Node result = null;
+        _result = null;
         float sqrtDistance = float.MaxValue;
         foreach (var node in _nodes)
         {
             var compareSqrtDistance = Vector3.SqrMagnitude(node.transform.position - pos.transform.position);
             if (sqrtDistance > compareSqrtDistance)
             {
-                result = node;
+                _result = node;
                 sqrtDistance = compareSqrtDistance;
             }
         }
-        return result;
+        return _result;
     }
 
     public List<Node> AStar(Node start, Node goal, Vector3 startPos, Vector3 goalPos)
     {
         //リスト作成
-        var openList = new PriorityQueue<Node, float>();
-        var closedList = new HashSet<Node>();
-        _record = new Dictionary<Node, AStarRecord>();
+        _record.Clear();
+        _openList.Clear();
+        _closedList.Clear();
 
         //スタート設定
         var newG = 0f;
         var newH = Heuristic(startPos, goalPos);
         var newF = newG + newH;
         _record[start] = new(newG, newH, newF, null);
-        openList.Enqueue(start, newF);
+        _openList.Enqueue(start, newF);
 
-        while (openList.Count > 0)
+        while (_openList.Count > 0)
         {
-            var currentNode = openList.Dequeue();
+            var currentNode = _openList.Dequeue();
             if (currentNode.element == goal) return BuildPath(goal, goalPos);
-            closedList.Add(currentNode.element);
+            _closedList.Add(currentNode.element);
 
             foreach (var adj in currentNode.element.Nodeds)
             {
-                if (closedList.Contains(adj.Node)) continue;
+                if (_closedList.Contains(adj.Node)) continue;
                 newG = _record[currentNode.element].G + adj.Cost;
                 var isNew = !_record.ContainsKey(adj.Node);
                 if (isNew || _record[adj.Node].G > newG)
@@ -65,11 +73,11 @@ public class AStarAlgorithm
                     _record[adj.Node] = new(newG, newH, newF, currentNode.element);
                     if (isNew)
                     {
-                        openList.Enqueue(adj.Node, newF);
+                        _openList.Enqueue(adj.Node, newF);
                     }
                     else
                     {
-                        openList.BuildHeap();
+                        _openList.BuildHeap();
                     }
                 }
             }
@@ -84,15 +92,16 @@ public class AStarAlgorithm
 
     List<Node> BuildPath(Node goal, Vector3 goalPos)
     {
-        var path = new List<Node>() { goal };
+        _path.Clear();
+        _path.Add(goal);
         var currentNode = _record[goal].Parent;
         while (currentNode != null)
         {
-            path.Add(currentNode);
+            _path.Add(currentNode);
             currentNode = _record[currentNode].Parent;
         }
-        path.Reverse();
-        return path;
+        _path.Reverse();
+        return _path;
     }
 }
 
@@ -152,6 +161,11 @@ public class PriorityQueue<TElement, TPriority> where TPriority : IComparable<TP
             if (item.Equals(element)) return true;
         }
         return false;
+    }
+
+    public void Clear()
+    {
+        _list.Clear();
     }
 
     public void BuildHeap()

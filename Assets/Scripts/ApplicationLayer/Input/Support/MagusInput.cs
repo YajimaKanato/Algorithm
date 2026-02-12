@@ -5,7 +5,7 @@ public class MaguInput : MoveCharacterInput
     public override void MoveSetting()
     {
         if (!_targetGameObject) return;
-        _characterSystem.Move<MagusRuntimeData>(_id, _characterView, gameObject, _targetGameObject);
+        _characterSystem.Move<MagusRuntimeData>(_id, _characterView, gameObject, _targetGameObject, _astar);
     }
 
     protected override void Arrived()

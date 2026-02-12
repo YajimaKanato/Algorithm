@@ -5,10 +5,15 @@ public class HealerDefaultData : CharacterDefaultData
 {
     public override CharacterRuntimeData CreateRuntimeData(RuntimeDataRepository repository, int id)
     {
-        if (repository.TryGetData<HealerRuntimeData>(id, out _)) return null;
+        if (repository.TryGetData<HealerRuntimeData>(id, out var data)) return data;
 
-        var data = new HealerRuntimeData(this);
+        data = new HealerRuntimeData(this);
         repository.RegisterData(id, data);
         return data;
+    }
+
+    public override void RemoveRuntimeData(RuntimeDataRepository repository, int id)
+    {
+        repository.RemoveData<HealerRuntimeData>(id);
     }
 }

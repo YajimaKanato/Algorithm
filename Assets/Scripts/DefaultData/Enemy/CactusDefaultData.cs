@@ -5,10 +5,15 @@ public class CactusDefaultData : CharacterDefaultData
 {
     public override CharacterRuntimeData CreateRuntimeData(RuntimeDataRepository repository, int id)
     {
-        if (repository.TryGetData<CactusRuntimeData>(id, out _)) return null;
+        if (repository.TryGetData<CactusRuntimeData>(id, out var data)) return data;
 
-        var data = new CactusRuntimeData(this);
+        data = new CactusRuntimeData(this);
         repository.RegisterData(id, data);
         return data;
+    }
+
+    public override void RemoveRuntimeData(RuntimeDataRepository repository, int id)
+    {
+        repository.RemoveData<CactusRuntimeData>(id);
     }
 }

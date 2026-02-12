@@ -5,7 +5,7 @@ public class MushInput : MoveCharacterInput
     public override void MoveSetting()
     {
         if (!_targetGameObject) return;
-        _characterSystem.Move<MushroomRuntimeData>(_id, _characterView, gameObject, _targetGameObject);
+        _characterSystem.Move<MushroomRuntimeData>(_id, _characterView, gameObject, _targetGameObject, _astar);
     }
 
     protected override void Arrived()
